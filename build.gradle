@@ -1,8 +1,8 @@
 buildscript {
     ext {
-        compose_version = '1.1.0'
+        compose_version = '1.2.0'
         accompanist_version = '0.21.3-beta'
-        kotlin_version = '1.6.10'
+        kotlin_version = '1.7.0'
         room_version='2.4.3'
         hilt_version='2.41'
         moshi_version = "1.9.3"
