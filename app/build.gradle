@@ -97,4 +97,6 @@ dependencies {
 
     // Window Manager
     implementation("androidx.window:window:1.1.0-alpha03")
+
+    implementation "androidx.core:core-splashscreen:1.0.0"
 }
