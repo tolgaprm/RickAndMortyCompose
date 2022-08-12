@@ -12,7 +12,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.prmto.rickandmortycompose.navigation.Screen
 
 @Composable
-fun CharacterScreen(navController: NavHostController) {
+fun CharacterScreen() {
 
 Text(text = "Character Screen")
 }

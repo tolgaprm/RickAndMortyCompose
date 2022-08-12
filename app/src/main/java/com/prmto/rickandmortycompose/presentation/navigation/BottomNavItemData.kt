@@ -1,4 +1,4 @@
-package com.prmto.rickandmortycompose.presentation.bottom_navigation
+package com.prmto.rickandmortycompose.presentation.navigation
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes

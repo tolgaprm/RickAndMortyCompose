@@ -5,6 +5,6 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 
 @Composable
-fun LocationScreen(navController: NavHostController) {
+fun LocationScreen() {
     Text(text = "Location")
 }

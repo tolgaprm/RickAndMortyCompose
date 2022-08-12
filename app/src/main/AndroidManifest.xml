@@ -16,7 +16,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.app.Splash" >
+            android:theme="@style/Theme.RickAndMortyCompose" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -12,7 +12,7 @@ import com.prmto.rickandmortycompose.presentation.screen.episode.EpisodeScreen
 fun NavGraph(navController: NavHostController) {
     NavHost(navController = navController, startDestination = Screen.Character.route) {
         composable(Screen.Character.route) {
-            CharacterScreen(navController = navController)
+            CharacterScreen()
         }
 
         composable(Screen.CharacterDetail.route) {
@@ -20,7 +20,7 @@ fun NavGraph(navController: NavHostController) {
         }
 
         composable(Screen.Location.route) {
-            LocationScreen(navController = navController)
+            LocationScreen()
         }
 
         composable(Screen.LocationDetail.route) {
@@ -28,7 +28,7 @@ fun NavGraph(navController: NavHostController) {
         }
 
         composable(Screen.Episode.route) {
-            EpisodeScreen(navController = navController)
+            EpisodeScreen()
         }
         composable(Screen.EpisodeDetail.route) {
 

@@ -1,4 +1,4 @@
-package com.prmto.rickandmortycompose.ui.theme
+package com.prmto.rickandmortycompose.presentation.ui.theme
 
 import androidx.compose.material.Colors
 import androidx.compose.runtime.Composable

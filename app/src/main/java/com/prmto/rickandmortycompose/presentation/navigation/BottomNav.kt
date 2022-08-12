@@ -1,8 +1,8 @@
-package com.prmto.rickandmortycompose.presentation.bottom_navigation
+package com.prmto.rickandmortycompose.presentation.navigation
 
+import android.annotation.SuppressLint
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshots.SnapshotStateList
@@ -12,41 +12,24 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
+import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
-import com.prmto.rickandmortycompose.navigation.NavGraph
-import com.prmto.rickandmortycompose.ui.theme.BOTTOM_NAV_ELEVATION
-import com.prmto.rickandmortycompose.ui.theme.bottomNavSelectedColor
-import com.prmto.rickandmortycompose.ui.theme.bottomNavUnSelectedColor
+import com.prmto.rickandmortycompose.presentation.ui.theme.BOTTOM_NAV_ELEVATION
+import com.prmto.rickandmortycompose.presentation.ui.theme.bottomNavSelectedColor
+import com.prmto.rickandmortycompose.presentation.ui.theme.bottomNavUnSelectedColor
 import com.prmto.rickandmortycompose.util.Constant.CHARACTER_ICON_INDEX
 import com.prmto.rickandmortycompose.util.Constant.EPISODE_ICON_INDEX
 import com.prmto.rickandmortycompose.util.Constant.LOCATION_ICON_INDEX
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @ExperimentalUnitApi
 @Composable
 fun BottomNav(
-    navController: NavHostController
+    bottomNavItems: List<BottomNavItemData>,
+    currentDestination: NavDestination?,
+    icons: SnapshotStateList<Int>,
+    navigateToRoute: (route: String) -> Unit,
 ) {
-    val bottomNavItems = listOf(
-        BottomNavItemData.Character,
-        BottomNavItemData.Location,
-        BottomNavItemData.Episode
-    )
-
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentDestination = navBackStackEntry?.destination
-
-
-    val icons = remember {
-        mutableStateListOf(
-            BottomNavItemData.Character.selectedIcon,
-            BottomNavItemData.Location.unSelectedIcon,
-            BottomNavItemData.Episode.unSelectedIcon,
-        )
-    }
-
-
     Scaffold(
         bottomBar = {
             bottomNavItems.forEach { it ->
@@ -60,12 +43,12 @@ fun BottomNav(
                                 icon = {
                                     Icon(
                                         painter = painterResource(id = icons[index]),
-                                        contentDescription = null
+                                        contentDescription = currentDestination.route
                                     )
                                 },
                                 selected = currentDestination.hierarchy.any { it.route == bottomNavItem.route },
                                 onClick = {
-                                    navController.navigate(route = bottomNavItem.route)
+                                    navigateToRoute(bottomNavItem.route)
                                     handleIconsState(bottomNavItem = bottomNavItem, icons = icons)
                                 },
                                 label = {
@@ -86,10 +69,9 @@ fun BottomNav(
                 }
             }
 
-        }
-    ) {
-        NavGraph(navController = navController)
-    }
+        },
+        content = {}
+    )
 }
 
 fun handleIconsState(bottomNavItem: BottomNavItemData, icons: SnapshotStateList<Int>) {
