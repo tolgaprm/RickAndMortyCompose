@@ -37,6 +37,17 @@ fun CharacterDto.toCharacter(): Character {
     )
 }
 
+fun List<CharacterDto>.toCharacter(): List<Character> {
+    return map {
+        Character(
+            id = it.id,
+            name = it.name,
+            status = it.status,
+            image = it.image
+        )
+    }
+}
+
 fun CharacterDto.toCharacterDetail(): CharacterDetail {
     return CharacterDetail(
         id = id,

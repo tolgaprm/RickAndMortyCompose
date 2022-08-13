@@ -10,7 +10,9 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import com.prmto.rickandmortycompose.presentation.RickAndMortyApp
 import com.prmto.rickandmortycompose.presentation.ui.theme.RickAndMortyComposeTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 @ExperimentalUnitApi
 @ExperimentalMaterial3WindowSizeClassApi
 class MainActivity : ComponentActivity() {

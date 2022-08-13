@@ -6,11 +6,14 @@ import com.prmto.rickandmortycompose.data.remote.dto.LocationDto
 import com.prmto.rickandmortycompose.domain.model.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface RickAndMortyAPI {
 
     @GET("character")
-    suspend fun getAllCharacters(): Response<CharacterDto>
+    suspend fun getAllCharacters(
+        @Query("page") page: Int? = null
+    ): Response<CharacterDto>
 
     @GET("character/{id}")
     suspend fun getCharacter(

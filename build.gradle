@@ -4,7 +4,7 @@ buildscript {
         accompanist_version = '0.21.3-beta'
         kotlin_version = '1.7.0'
         room_version='2.4.3'
-        hilt_version='2.41'
+        hilt_version='2.42'
         moshi_version = "1.9.3"
         navigation_version ="2.5.1"
     }
