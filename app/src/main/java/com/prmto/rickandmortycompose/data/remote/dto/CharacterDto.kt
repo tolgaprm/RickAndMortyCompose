@@ -3,7 +3,7 @@ package com.prmto.rickandmortycompose.data.remote.dto
 import com.prmto.rickandmortycompose.domain.model.Character
 import com.prmto.rickandmortycompose.domain.model.CharacterDetail
 
-data class CharactersDto(
+data class CharacterDto(
     val id: Int,
     val name: String,
     val status: String,
@@ -28,7 +28,7 @@ data class CharacterLocation(
     val url: String,
 )
 
-fun CharactersDto.toCharacter(): Character {
+fun CharacterDto.toCharacter(): Character {
     return Character(
         id = id,
         name = name,
@@ -37,7 +37,7 @@ fun CharactersDto.toCharacter(): Character {
     )
 }
 
-fun CharactersDto.toCharacterDetail(): CharacterDetail {
+fun CharacterDto.toCharacterDetail(): CharacterDetail {
     return CharacterDetail(
         id = id,
         name = name,
