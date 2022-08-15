@@ -3,8 +3,6 @@ package com.prmto.rickandmortycompose.presentation.navigation
 import android.annotation.SuppressLint
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -23,6 +21,7 @@ import com.prmto.rickandmortycompose.util.Constant.LOCATION_ICON_INDEX
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @ExperimentalUnitApi
+@ExperimentalMaterialApi
 @Composable
 fun BottomNav(
     bottomNavItems: List<BottomNavItemData>,
@@ -30,6 +29,8 @@ fun BottomNav(
     icons: SnapshotStateList<Int>,
     navigateToRoute: (route: String) -> Unit,
 ) {
+
+
     Scaffold(
         bottomBar = {
             bottomNavItems.forEach { it ->
@@ -73,6 +74,7 @@ fun BottomNav(
         content = {}
     )
 }
+
 
 fun handleIconsState(bottomNavItem: BottomNavItemData, icons: SnapshotStateList<Int>) {
     val character = BottomNavItemData.Character

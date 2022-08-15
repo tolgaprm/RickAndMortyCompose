@@ -11,6 +11,7 @@ val Teal200 = Color(0xFF03DAC5)
 val Color.Companion.BasicBlack get() = Color(0xFF081F32)
 val Indigo = Color(0xFF5856D6)
 val Gray1 = Color(0xFF8E8E93)
+val Gray6 = Color(0xFFF2F2F7)
 
 val Colors.bottomNavSelectedColor
     @Composable
@@ -19,3 +20,12 @@ val Colors.bottomNavSelectedColor
 val Colors.bottomNavUnSelectedColor
     @Composable
     get() = Gray1
+
+val Colors.IconTintColor
+    @Composable
+    get() = Indigo
+
+val Colors.buttonTextColor
+    @Composable
+    get() = Gray6
+

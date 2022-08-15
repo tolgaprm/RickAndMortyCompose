@@ -4,4 +4,11 @@
     <string name="episode">Episode</string>
     <string name="location">Location</string>
     <string name="character">Character</string>
+    <string name="up_button">Up Button</string>
+    <string name="filter_list">Filter List</string>
+    <string name="apply">Apply</string>
+    <string name="filter">Filter</string>
+    <string name="character_name">Character Name</string>
+    <string name="status">Status</string>
+    <string name="gender">Gender</string>
 </resources>
