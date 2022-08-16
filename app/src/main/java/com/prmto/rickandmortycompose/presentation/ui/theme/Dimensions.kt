@@ -11,3 +11,5 @@ val SMALL_PADDING = 4.dp
 
 val SHEET_PEEK_HEIGHT = 0.dp
 
+val IMAGE_LIST_TYPE_SIZE = 100.dp
+

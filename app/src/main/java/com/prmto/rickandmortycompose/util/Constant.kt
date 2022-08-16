@@ -17,4 +17,6 @@ object Constant {
     const val CHARACTER_STARTING_PAGE_INDEX = 1
 
     const val ITEMS_PER_PAGE = 20
+
+
 }

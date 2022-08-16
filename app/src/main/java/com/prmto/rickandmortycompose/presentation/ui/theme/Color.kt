@@ -29,3 +29,15 @@ val Colors.buttonTextColor
     @Composable
     get() = Gray6
 
+fun Color.Companion.statusTextColor(
+    statusName: String
+): Color {
+    return when (statusName) {
+        "Alive" -> Color.Green
+        "Dead" -> Color.Red
+        else -> {
+            Color.Gray
+        }
+    }
+}
+

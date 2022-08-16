@@ -33,7 +33,9 @@ fun CharacterDto.toCharacter(): Character {
         id = id,
         name = name,
         status = status,
-        image = image
+        image = image,
+        species = species,
+        gender = gender
     )
 }
 
@@ -43,7 +45,9 @@ fun List<CharacterDto>.toCharacter(): List<Character> {
             id = it.id,
             name = it.name,
             status = it.status,
-            image = it.image
+            image = it.image,
+            species = it.species,
+            gender = it.gender
         )
     }
 }
