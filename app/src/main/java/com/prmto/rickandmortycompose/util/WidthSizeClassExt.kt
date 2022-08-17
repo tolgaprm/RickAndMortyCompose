@@ -14,3 +14,9 @@ fun WindowWidthSizeClass.isMediumScreen(
 ): Boolean {
     return this == WindowWidthSizeClass.Medium
 }
+
+@Composable
+fun WindowWidthSizeClass.isExpandedScreen(
+): Boolean {
+    return this == WindowWidthSizeClass.Expanded
+}

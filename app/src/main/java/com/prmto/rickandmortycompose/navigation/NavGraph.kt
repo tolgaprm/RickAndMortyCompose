@@ -7,17 +7,26 @@ import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import coil.annotation.ExperimentalCoilApi
 import com.prmto.rickandmortycompose.presentation.screen.character.CharacterScreen
 import com.prmto.rickandmortycompose.presentation.screen.episode.EpisodeScreen
 import com.prmto.rickandmortycompose.presentation.screen.location.LocationScreen
 
+@ExperimentalCoilApi
 @ExperimentalMaterialApi
 @ExperimentalUnitApi
 @Composable
-fun NavGraph(navController: NavHostController) {
+fun NavGraph(
+    navController: NavHostController, widthSizeClass: WindowWidthSizeClass,
+) {
     NavHost(navController = navController, startDestination = Screen.Character.route) {
         composable(Screen.Character.route) {
-            CharacterScreen()
+            CharacterScreen(
+                widthSizeClass = widthSizeClass,
+                onClickCharacterItem = {
+
+                }
+            )
         }
 
         composable(Screen.CharacterDetail.route) {

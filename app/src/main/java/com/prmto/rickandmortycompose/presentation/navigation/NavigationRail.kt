@@ -31,7 +31,6 @@ fun NavRail(
     onHeaderClick: () -> Unit,
     navigateToRoute: (route: String) -> Unit
 ) {
-
     NavigationRail(
         header = {
             NavRailHeader(

@@ -12,6 +12,7 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import coil.annotation.ExperimentalCoilApi
 import com.prmto.rickandmortycompose.navigation.NavGraph
 import com.prmto.rickandmortycompose.navigation.Screen
 import com.prmto.rickandmortycompose.presentation.components.BottomSheetContent
@@ -23,9 +24,11 @@ import com.prmto.rickandmortycompose.presentation.ui.theme.SHEET_PEEK_HEIGHT
 import com.prmto.rickandmortycompose.presentation.ui.theme.Shapes
 import com.prmto.rickandmortycompose.util.Constant.CHARACTER_ICON_INDEX
 import com.prmto.rickandmortycompose.util.isCompactScreen
+import com.prmto.rickandmortycompose.util.isExpandedScreen
 import com.prmto.rickandmortycompose.util.isMediumScreen
 import kotlinx.coroutines.launch
 
+@ExperimentalCoilApi
 @ExperimentalUnitApi
 @ExperimentalMaterialApi
 
@@ -40,9 +43,6 @@ fun RickAndMortyApp(
         BottomNavItemData.Location,
         BottomNavItemData.Episode
     )
-
-    val isCompactScreen = widthSizeClass.isCompactScreen()
-    val isMediumScreen = widthSizeClass.isMediumScreen()
 
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -101,9 +101,9 @@ fun RickAndMortyApp(
             BottomSheetContent()
         }
     ) {
-        Column() {
+        Column {
             Row {
-                if (isMediumScreen) {
+                if (widthSizeClass.isMediumScreen() || widthSizeClass.isExpandedScreen()) {
                     NavRail(
                         bottomNavItems = bottomNavItems,
                         currentDestination = currentDestination,
@@ -128,9 +128,12 @@ fun RickAndMortyApp(
                         }
                     }
                 }
-                NavGraph(navController = navController)
+                NavGraph(
+                    navController = navController,
+                    widthSizeClass = widthSizeClass
+                )
             }
-            if (isCompactScreen) {
+            if (widthSizeClass.isCompactScreen()) {
                 BottomNav(
                     bottomNavItems = bottomNavItems,
                     currentDestination = currentDestination,
