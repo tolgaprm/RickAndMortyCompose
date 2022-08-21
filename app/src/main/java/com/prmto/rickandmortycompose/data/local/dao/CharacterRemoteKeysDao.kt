@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.prmto.rickandmortycompose.domain.model.CharacterRemoteKeys
+import com.prmto.rickandmortycompose.domain.model.remote_key.CharacterRemoteKeys
 
 @Dao
 interface CharacterRemoteKeysDao {

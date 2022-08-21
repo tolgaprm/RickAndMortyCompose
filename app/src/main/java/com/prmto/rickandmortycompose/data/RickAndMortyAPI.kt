@@ -21,7 +21,9 @@ interface RickAndMortyAPI {
     ): CharacterDto
 
     @GET("location")
-    suspend fun getAllLocations(): Response<LocationDto>
+    suspend fun getAllLocations(
+        @Query("page") page: Int? = null
+    ): Response<LocationDto>
 
     @GET("location/{id}")
     suspend fun getLocation(

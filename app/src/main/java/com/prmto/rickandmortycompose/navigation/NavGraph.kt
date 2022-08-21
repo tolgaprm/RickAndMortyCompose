@@ -21,12 +21,14 @@ fun NavGraph(
 ) {
     NavHost(navController = navController, startDestination = Screen.Character.route) {
         composable(Screen.Character.route) {
+
             CharacterScreen(
                 widthSizeClass = widthSizeClass,
                 onClickCharacterItem = {
 
                 }
             )
+
         }
 
         composable(Screen.CharacterDetail.route) {

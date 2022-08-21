@@ -3,6 +3,7 @@ package com.prmto.rickandmortycompose.di
 import com.prmto.rickandmortycompose.data.repository.Repository
 import com.prmto.rickandmortycompose.domain.use_cases.UseCases
 import com.prmto.rickandmortycompose.domain.use_cases.get_all_characters.GetAllCharactersUseCase
+import com.prmto.rickandmortycompose.domain.use_cases.get_all_locations.GetAllLocationsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,7 +20,8 @@ object RepositoryModule {
         repository: Repository
     ): UseCases {
         return UseCases(
-            getAllCharactersUseCase = GetAllCharactersUseCase(repository)
+            getAllCharactersUseCase = GetAllCharactersUseCase(repository),
+            getAllLocationsUseCase = GetAllLocationsUseCase(repository)
         )
     }
 }

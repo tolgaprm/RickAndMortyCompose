@@ -73,10 +73,11 @@ fun NavRail(
 fun NavRailHeader(
     onHeaderClick: () -> Unit
 ) {
+
     Image(
         modifier = Modifier
             .padding(SMALL_PADDING)
-            .size(60.dp)
+            .size(40.dp)
             .clip(Shapes.large)
             .clickable {
                 onHeaderClick()

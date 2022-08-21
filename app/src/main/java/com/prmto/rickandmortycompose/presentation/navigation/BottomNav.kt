@@ -2,6 +2,7 @@ package com.prmto.rickandmortycompose.presentation.navigation
 
 import android.annotation.SuppressLint
 import androidx.compose.material.*
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.graphics.Color
@@ -12,6 +13,9 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavHostController
+import coil.annotation.ExperimentalCoilApi
+import com.prmto.rickandmortycompose.navigation.NavGraph
 import com.prmto.rickandmortycompose.presentation.ui.theme.BOTTOM_NAV_ELEVATION
 import com.prmto.rickandmortycompose.presentation.ui.theme.bottomNavSelectedColor
 import com.prmto.rickandmortycompose.presentation.ui.theme.bottomNavUnSelectedColor
@@ -19,6 +23,7 @@ import com.prmto.rickandmortycompose.util.Constant.CHARACTER_ICON_INDEX
 import com.prmto.rickandmortycompose.util.Constant.EPISODE_ICON_INDEX
 import com.prmto.rickandmortycompose.util.Constant.LOCATION_ICON_INDEX
 
+@OptIn(ExperimentalCoilApi::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @ExperimentalUnitApi
 @ExperimentalMaterialApi
@@ -27,9 +32,11 @@ fun BottomNav(
     bottomNavItems: List<BottomNavItemData>,
     currentDestination: NavDestination?,
     icons: SnapshotStateList<Int>,
+    navController: NavHostController,
+    widthSizeClass: WindowWidthSizeClass,
     navigateToRoute: (route: String) -> Unit,
-) {
 
+    ) {
 
     Scaffold(
         bottomBar = {
@@ -71,7 +78,9 @@ fun BottomNav(
             }
 
         },
-        content = {}
+        content = {
+            NavGraph(navController = navController, widthSizeClass = widthSizeClass)
+        }
     )
 }
 

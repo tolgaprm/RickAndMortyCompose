@@ -1,4 +1,4 @@
-package com.prmto.rickandmortycompose.domain.model
+package com.prmto.rickandmortycompose.domain.model.remote_key
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

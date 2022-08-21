@@ -1,6 +1,5 @@
 package com.prmto.rickandmortycompose.data.paging_source
 
-import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -10,7 +9,7 @@ import com.prmto.rickandmortycompose.data.RickAndMortyAPI
 import com.prmto.rickandmortycompose.data.local.RickAndMortyDatabase
 import com.prmto.rickandmortycompose.data.remote.dto.toCharacter
 import com.prmto.rickandmortycompose.domain.model.Character
-import com.prmto.rickandmortycompose.domain.model.CharacterRemoteKeys
+import com.prmto.rickandmortycompose.domain.model.remote_key.CharacterRemoteKeys
 import com.prmto.rickandmortycompose.util.Constant.CHARACTER_STARTING_PAGE_INDEX
 import javax.inject.Inject
 

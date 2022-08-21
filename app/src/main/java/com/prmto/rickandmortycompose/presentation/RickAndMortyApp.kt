@@ -102,8 +102,8 @@ fun RickAndMortyApp(
         }
     ) {
         Column {
-            Row {
-                if (widthSizeClass.isMediumScreen() || widthSizeClass.isExpandedScreen()) {
+            if (widthSizeClass.isMediumScreen() || widthSizeClass.isExpandedScreen()) {
+                Row {
                     NavRail(
                         bottomNavItems = bottomNavItems,
                         currentDestination = currentDestination,
@@ -127,17 +127,23 @@ fun RickAndMortyApp(
                             launchSingleTop = true
                         }
                     }
+
+                    NavGraph(
+                        navController = navController,
+                        widthSizeClass = widthSizeClass
+                    )
+
                 }
-                NavGraph(
-                    navController = navController,
-                    widthSizeClass = widthSizeClass
-                )
+
             }
+
             if (widthSizeClass.isCompactScreen()) {
                 BottomNav(
                     bottomNavItems = bottomNavItems,
                     currentDestination = currentDestination,
-                    icons = icons
+                    icons = icons,
+                    navController = navController,
+                    widthSizeClass = widthSizeClass
                 ) { route ->
                     navController.navigate(route = route) {
                         popUpTo(navController.graph.findStartDestination().id) {

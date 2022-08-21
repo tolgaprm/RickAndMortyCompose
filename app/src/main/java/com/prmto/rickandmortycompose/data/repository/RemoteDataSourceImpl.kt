@@ -7,7 +7,9 @@ import androidx.paging.PagingData
 import com.prmto.rickandmortycompose.data.RickAndMortyAPI
 import com.prmto.rickandmortycompose.data.local.RickAndMortyDatabase
 import com.prmto.rickandmortycompose.data.paging_source.CharactersRemoteMediator
+import com.prmto.rickandmortycompose.data.paging_source.LocationsRemoteMediator
 import com.prmto.rickandmortycompose.domain.model.Character
+import com.prmto.rickandmortycompose.domain.model.Location
 import com.prmto.rickandmortycompose.domain.repository.RemoteDataSource
 import com.prmto.rickandmortycompose.util.Constant.ITEMS_PER_PAGE
 import kotlinx.coroutines.flow.Flow
@@ -20,6 +22,7 @@ class RemoteDataSourceImpl @Inject constructor(
 ) : RemoteDataSource {
 
     private val characterDao = database.characterDao()
+    private val locationDao = database.locationDao()
 
     override fun getAllCharacters(): Flow<PagingData<Character>> {
         return Pager(
@@ -29,6 +32,17 @@ class RemoteDataSourceImpl @Inject constructor(
                 database = database
             ),
             pagingSourceFactory = { characterDao.getAllCharacters() }
+        ).flow
+    }
+
+    override fun getAllLocations(): Flow<PagingData<Location>> {
+        return Pager(
+            config = PagingConfig(pageSize = ITEMS_PER_PAGE),
+            remoteMediator = LocationsRemoteMediator(
+                rickAndMortyAPI = rickAndMortyAPI,
+                database = database
+            ),
+            pagingSourceFactory = { locationDao.getAllLocations() }
         ).flow
     }
 

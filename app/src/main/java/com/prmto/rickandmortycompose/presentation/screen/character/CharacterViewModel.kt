@@ -21,10 +21,10 @@ class CharacterViewModel @Inject constructor(
     private val _characterNameQuery = mutableStateOf("")
     val characterNameQuery: State<String> get() = _characterNameQuery
 
-    private val _statusState = mutableStateOf<StatusState>(StatusState.ALIVE)
+    private val _statusState = mutableStateOf<StatusState>(StatusState.NONE)
     val statusState: State<StatusState> get() = _statusState
 
-    private val _genderState = mutableStateOf<GenderState>(GenderState.FEMALE)
+    private val _genderState = mutableStateOf<GenderState>(GenderState.NONE)
     val genderState: State<GenderState> get() = _genderState
 
     private val _stateListType = mutableStateOf<ListType>(ListType.HORIZONTAL_GRID)
@@ -32,6 +32,10 @@ class CharacterViewModel @Inject constructor(
 
     private val _listTypeIcon = mutableStateOf<Int>(R.drawable.grid_list)
     val listTypeIcon: State<Int> get() = _listTypeIcon
+
+    private val _isFilter = mutableStateOf<Boolean>(false)
+    val isFilter: State<Boolean> get() = _isFilter
+
 
     fun onChangeCharacterQuery(name: String) {
         _characterNameQuery.value = name
@@ -49,7 +53,24 @@ class CharacterViewModel @Inject constructor(
         Log.d("characterViewModel", _characterNameQuery.value)
         Log.d("characterViewModel", _statusState.value.title)
         Log.d("characterViewModel", _genderState.value.title)
+    }
 
+    fun checkIfTheFilterHasBeenApplied(): Boolean {
+
+        val statusValue = _statusState.value
+        val genderValue = _genderState.value
+        val characterName = _characterNameQuery.value
+
+        _isFilter.value =
+            !(statusValue == StatusState.NONE && genderValue == GenderState.NONE && characterName == "")
+
+        return _isFilter.value
+    }
+
+    fun clearTheFilter() {
+        _statusState.value = StatusState.NONE
+        _genderState.value = GenderState.NONE
+        _characterNameQuery.value = ""
     }
 
     fun onClickListTypeIcon() {
