@@ -32,7 +32,9 @@ interface RickAndMortyAPI {
 
 
     @GET("episode")
-    suspend fun getAllEpisodes(): Response<EpisodeDto>
+    suspend fun getAllEpisodes(
+        @Query("page") page: Int? = null
+    ): Response<EpisodeDto>
 
     @GET("episode/{id}")
     suspend fun getEpisode(

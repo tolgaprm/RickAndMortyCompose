@@ -13,13 +13,15 @@ data class EpisodeDto(
     val created: String
 )
 
-fun EpisodeDto.toEpisode(): Episode {
-    return Episode(
-        id = id,
-        name = name,
-        air_date = air_date,
-        episode = episode
-    )
+fun List<EpisodeDto>.toEpisode(): List<Episode> {
+    return map { episode ->
+        Episode(
+            id = episode.id,
+            name = episode.name,
+            air_date = episode.air_date,
+            episode = episode.episode
+        )
+    }
 }
 
 

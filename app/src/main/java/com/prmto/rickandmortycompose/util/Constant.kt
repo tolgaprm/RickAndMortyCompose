@@ -12,9 +12,11 @@ object Constant {
 
     const val CHARACTER_TABLE_NAME = "character_table"
     const val LOCATION_TABLE_NAME = "location_table"
+    const val EPISODE_TABLE_NAME = "episode_table"
 
     const val CHARACTER_REMOTE_KEYS_DATABASE_TABLE = "character_remote_keys_table"
     const val LOCATION_REMOTE_KEYS_DATABASE_TABLE = "location_remote_keys_table"
+    const val EPISODE_REMOTE_KEYS_DATABASE_TABLE = "episode_remote_keys_table"
 
     const val CHARACTER_STARTING_PAGE_INDEX = 1
     const val LOCATION_STARTING_PAGE_INDEX = 1

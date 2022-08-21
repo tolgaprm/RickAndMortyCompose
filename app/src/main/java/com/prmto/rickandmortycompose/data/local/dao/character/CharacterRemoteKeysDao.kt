@@ -1,4 +1,4 @@
-package com.prmto.rickandmortycompose.data.local.dao
+package com.prmto.rickandmortycompose.data.local.dao.character
 
 import androidx.room.Dao
 import androidx.room.Insert
