@@ -67,7 +67,7 @@ fun CharacterListContent(
         }
     } else {
         LazyVerticalGrid(
-            columns = GridCells.Adaptive(160.dp),
+            columns = GridCells.Adaptive(170.dp),
             modifier = Modifier.padding(top = 32.dp),
             verticalArrangement = Arrangement.spacedBy(LARGE_PADDING),
             horizontalArrangement = Arrangement.spacedBy(LARGE_PADDING),
@@ -117,7 +117,7 @@ fun CharacterItemForGridView(
             .clip(Shapes.large)
             .fillMaxWidth()
             .wrapContentHeight()
-            .border(2.dp, color = Color.LightGray, shape = Shapes.large)
+            .border(2.dp, color = MaterialTheme.colors.itemBorderColor, shape = Shapes.large)
             .clickable {
                 onClick(character.id)
             },

@@ -1,31 +1,21 @@
 package com.prmto.rickandmortycompose.presentation.screen.location
 
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Text
+import android.util.Log
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.items
 
+@ExperimentalUnitApi
 @Composable
 fun LocationScreen(
-    locationViewModel: LocationViewModel = hiltViewModel()
+    locationViewModel: LocationViewModel = hiltViewModel(),
+    widthSizeClass: WindowWidthSizeClass
 ) {
     val locations = locationViewModel.locations.collectAsLazyPagingItems()
 
-    LazyColumn(
-        contentPadding = PaddingValues(20.dp)
-    ) {
-        items(locations) {
-            if (it != null) {
-                Text(
-                    text = it.name,
-                    fontSize = 20.sp
-                )
-            }
-        }
+    LocationList(locations = locations, widthSizeClass = widthSizeClass) {
+
     }
 }

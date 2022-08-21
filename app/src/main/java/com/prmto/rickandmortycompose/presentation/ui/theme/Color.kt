@@ -12,6 +12,7 @@ val Color.Companion.BasicBlack get() = Color(0xFF081F32)
 val Indigo = Color(0xFF5856D6)
 val Gray1 = Color(0xFF8E8E93)
 val Gray6 = Color(0xFFF2F2F7)
+val Gray5 = Color(0xFFE5E5EA)
 
 val Colors.bottomNavSelectedColor
     @Composable
@@ -28,6 +29,10 @@ val Colors.IconTintColor
 val Colors.buttonTextColor
     @Composable
     get() = Gray6
+
+val Colors.itemBorderColor
+    @Composable
+    get() = Gray5
 
 fun Color.Companion.statusTextColor(
     statusName: String

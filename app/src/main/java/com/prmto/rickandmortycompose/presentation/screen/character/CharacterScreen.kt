@@ -1,12 +1,10 @@
 package com.prmto.rickandmortycompose.presentation.screen.character
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -19,8 +17,6 @@ import com.prmto.rickandmortycompose.presentation.components.CharacterListConten
 import com.prmto.rickandmortycompose.presentation.ui.theme.ICON_SIZE
 import com.prmto.rickandmortycompose.presentation.ui.theme.IconTintColor
 import com.prmto.rickandmortycompose.presentation.ui.theme.SMALL_PADDING
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 @ExperimentalCoilApi
 @ExperimentalUnitApi

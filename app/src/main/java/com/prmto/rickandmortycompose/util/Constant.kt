@@ -21,5 +21,6 @@ object Constant {
 
     const val ITEMS_PER_PAGE = 40
 
+    const val LOCATION_LIST_GRID_CELL = 2
 
 }
