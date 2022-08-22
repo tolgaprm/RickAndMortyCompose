@@ -36,7 +36,6 @@ class CharacterViewModel @Inject constructor(
     private val _isFilter = mutableStateOf<Boolean>(false)
     val isFilter: State<Boolean> get() = _isFilter
 
-
     fun onChangeCharacterQuery(name: String) {
         _characterNameQuery.value = name
     }
@@ -82,4 +81,5 @@ class CharacterViewModel @Inject constructor(
             _listTypeIcon.value = R.drawable.ic_list_icon
         }
     }
+
 }

@@ -13,6 +13,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import coil.annotation.ExperimentalCoilApi
+import com.prmto.rickandmortycompose.R
 import com.prmto.rickandmortycompose.navigation.NavGraph
 import com.prmto.rickandmortycompose.navigation.Screen
 import com.prmto.rickandmortycompose.presentation.components.BottomSheetContent
@@ -90,9 +91,12 @@ fun RickAndMortyApp(
                             bottomSheetState.collapse()
                         }
                     }
+                },
+                isHaveNavigateIcon = currentDestination.isHaveNavigationIcon(),
+                onClickNavigateIcon = {
+                    navController.popBackStack()
                 }
             )
-
         },
         sheetPeekHeight = SHEET_PEEK_HEIGHT,
         scaffoldState = scaffoldState,
@@ -164,6 +168,7 @@ fun NavDestination?.getLabelResId(): Int {
         Screen.Character.route -> BottomNavItemData.Character.name
         Screen.Location.route -> BottomNavItemData.Location.name
         Screen.Episode.route -> BottomNavItemData.Episode.name
+        Screen.CharacterDetail.route -> R.string.character_detail
         else -> {
             BottomNavItemData.Character.name
         }
@@ -174,6 +179,16 @@ fun NavDestination?.isCharacterScreen(): Boolean {
 
     return (this?.route == Screen.Character.route)
 }
+
+fun NavDestination?.isHaveNavigationIcon(): Boolean {
+    return (navigationIconWhoHaveIt.contains(this?.route))
+}
+
+val navigationIconWhoHaveIt = listOf(
+    Screen.CharacterDetail.route,
+    Screen.LocationDetail.route,
+    Screen.EpisodeDetail.route
+)
 
 
 

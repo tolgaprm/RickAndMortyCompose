@@ -62,6 +62,10 @@ fun CharacterListContent(
                             onClickCharacterItem(it)
                         }
                     )
+
+                    Divider(
+                        modifier = Modifier.padding(horizontal = MEDIUM_PADDING)
+                    )
                 }
             }
         }
@@ -83,7 +87,10 @@ fun CharacterListContent(
                     CharacterItemForGridView(
                         character = it,
                         widthSizeClass = widthSizeClass,
-                        onClick = {})
+                        onClick = {
+                            onClickCharacterItem(it)
+                        }
+                    )
                 }
             }
         }
