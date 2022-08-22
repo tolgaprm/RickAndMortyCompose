@@ -34,6 +34,10 @@ val Colors.itemBorderColor
     @Composable
     get() = Gray5
 
+val Colors.episodeItemNameColor
+    @Composable
+    get() = Gray1
+
 fun Color.Companion.statusTextColor(
     statusName: String
 ): Color {

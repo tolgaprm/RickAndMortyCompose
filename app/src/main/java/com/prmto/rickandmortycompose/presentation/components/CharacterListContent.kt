@@ -71,7 +71,12 @@ fun CharacterListContent(
             modifier = Modifier.padding(top = 32.dp),
             verticalArrangement = Arrangement.spacedBy(LARGE_PADDING),
             horizontalArrangement = Arrangement.spacedBy(LARGE_PADDING),
-            contentPadding = PaddingValues(LARGE_PADDING)
+            contentPadding = PaddingValues(
+                top = LARGE_PADDING,
+                start = LARGE_PADDING,
+                end = LARGE_PADDING,
+                bottom = BOTTOM_NAV_PADDING
+            )
         ) {
             items(characters.itemCount) { index ->
                 characters[index]?.let {

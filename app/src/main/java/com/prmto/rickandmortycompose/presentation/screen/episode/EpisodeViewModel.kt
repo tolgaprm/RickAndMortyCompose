@@ -27,7 +27,7 @@ class EpisodeViewModel @Inject constructor(
                     return@insertSeparators EpisodeListItem.SeparatorItem("Season 1")
                 }
 
-                if (after.season != before.season) {
+                if (before.season != after.season) {
                     return@insertSeparators EpisodeListItem.SeparatorItem("Season ${after.season}")
                 } else {
                     null

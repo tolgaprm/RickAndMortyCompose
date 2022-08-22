@@ -31,7 +31,12 @@ fun LocationList(
     LazyVerticalGrid(
         modifier = modifier,
         columns = GridCells.Fixed(Constant.LOCATION_LIST_GRID_CELL),
-        contentPadding = PaddingValues(LARGE_PADDING),
+        contentPadding = PaddingValues(
+            top = LARGE_PADDING,
+            start = LARGE_PADDING,
+            end = LARGE_PADDING,
+            bottom = BOTTOM_NAV_PADDING
+        ),
         verticalArrangement = Arrangement.spacedBy(LARGE_PADDING),
         horizontalArrangement = Arrangement.spacedBy(LARGE_PADDING)
     ) {
