@@ -47,7 +47,9 @@ fun NavGraph(
                 }
             )
         ) {
-            CharacterDetailScreen()
+            CharacterDetailScreen(
+                widthSizeClass = widthSizeClass
+            )
         }
 
         composable(Screen.Location.route) {

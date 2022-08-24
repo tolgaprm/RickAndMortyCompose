@@ -12,8 +12,6 @@ import com.prmto.rickandmortycompose.util.Constant.CHARACTER_DETAIL_ARGUMENT_KEY
 import com.prmto.rickandmortycompose.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -44,16 +42,20 @@ class CharacterDetailViewModel @Inject constructor(
                     when (it) {
                         is Resource.Loading -> {
                             Log.d("CharacterDetail", "loading")
-                            _characterDetailState.value = CharacterDetailState(isLoading = true)
+                            _characterDetailState.value = characterDetailState.value.copy(
+                                isLoading = true,
+                            )
                         }
                         is Resource.Success -> {
                             Log.d("CharacterDetail", "Success")
-                            _characterDetailState.value = CharacterDetailState(character = it.data)
+                            _characterDetailState.value =
+                                characterDetailState.value.copy(character = it.data)
                             if (it.data != null) getEpisode(it.data.episode)
                         }
                         is Resource.Error -> {
                             Log.d("CharacterDetail", "error")
-                            _characterDetailState.value = CharacterDetailState(isError = true)
+                            _characterDetailState.value =
+                                characterDetailState.value.copy(isError = true)
                         }
                     }
                 }
@@ -63,7 +65,9 @@ class CharacterDetailViewModel @Inject constructor(
 
     private fun getEpisode(episodes: List<String>) {
         Log.d("CharacterDetail", "episode")
-        _characterDetailState.value = CharacterDetailState(isLoading = true)
+        _characterDetailState.value = characterDetailState.value.copy(
+            isLoading = true,
+        )
 
         viewModelScope.launch(Dispatchers.IO) {
             val list: MutableList<Episode> = mutableListOf()
@@ -74,7 +78,7 @@ class CharacterDetailViewModel @Inject constructor(
                 list.add(episode)
             }
 
-            _characterDetailState.value = CharacterDetailState(
+            _characterDetailState.value = characterDetailState.value.copy(
                 isLoading = false,
                 episodes = list
             )

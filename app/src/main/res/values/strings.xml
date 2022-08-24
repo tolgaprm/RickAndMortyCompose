@@ -11,8 +11,11 @@
     <string name="character_name">Character Name</string>
     <string name="status">Status</string>
     <string name="gender">Gender</string>
+    <string name="origin">Origin</string>
     <string name="character_image">Character Image</string>
     <string name="list_type">List Type</string>
     <string name="clear">Clear</string>
     <string name="character_detail">Character Detail</string>
+    <string name="type">Type</string>
+
 </resources>
