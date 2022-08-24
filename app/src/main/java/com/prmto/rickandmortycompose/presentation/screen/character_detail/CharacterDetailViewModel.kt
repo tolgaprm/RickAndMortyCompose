@@ -18,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CharacterDetailViewModel @Inject constructor(
     private val useCases: UseCases,
-    savedStateHandle: SavedStateHandle
+    private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     private val _characterDetailState = mutableStateOf<CharacterDetailState>(CharacterDetailState())
     val characterDetailState: State<CharacterDetailState> get() = _characterDetailState
@@ -26,10 +26,20 @@ class CharacterDetailViewModel @Inject constructor(
     init {
         viewModelScope.launch(Dispatchers.IO) {
             val characterId = savedStateHandle.get<Int>(CHARACTER_DETAIL_ARGUMENT_KEY)
-            Log.d("CharacterDetail", characterId.toString())
             characterId?.let {
                 getCharacter(characterId = it)
             }
+        }
+
+    }
+
+    fun onClickRetry() {
+        val characterId = savedStateHandle.get<Int>(CHARACTER_DETAIL_ARGUMENT_KEY)
+        _characterDetailState.value = _characterDetailState.value.copy(
+            isError = false
+        )
+        characterId?.let {
+            getCharacter(characterId = it)
         }
 
     }
@@ -41,19 +51,16 @@ class CharacterDetailViewModel @Inject constructor(
                 .collect {
                     when (it) {
                         is Resource.Loading -> {
-                            Log.d("CharacterDetail", "loading")
                             _characterDetailState.value = characterDetailState.value.copy(
                                 isLoading = true,
                             )
                         }
                         is Resource.Success -> {
-                            Log.d("CharacterDetail", "Success")
                             _characterDetailState.value =
                                 characterDetailState.value.copy(character = it.data)
                             if (it.data != null) getEpisode(it.data.episode)
                         }
                         is Resource.Error -> {
-                            Log.d("CharacterDetail", "error")
                             _characterDetailState.value =
                                 characterDetailState.value.copy(isError = true)
                         }

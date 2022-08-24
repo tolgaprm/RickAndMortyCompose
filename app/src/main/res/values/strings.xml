@@ -17,5 +17,8 @@
     <string name="clear">Clear</string>
     <string name="character_detail">Character Detail</string>
     <string name="type">Type</string>
+    <string name="retry">Retry</string>
+    <string name="episodes">Episodes</string>
+    <string name="informations">Informations</string>
 
 </resources>

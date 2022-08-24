@@ -33,6 +33,7 @@ import com.prmto.rickandmortycompose.R
 import com.prmto.rickandmortycompose.domain.model.CharacterDetail
 import com.prmto.rickandmortycompose.domain.model.Episode
 import com.prmto.rickandmortycompose.presentation.components.EpisodeItemContent
+import com.prmto.rickandmortycompose.presentation.components.EpisodeItemShimmerEffect
 import com.prmto.rickandmortycompose.presentation.ui.theme.*
 
 @ExperimentalUnitApi
@@ -42,6 +43,7 @@ fun CharacterDetailContent(
     modifier: Modifier = Modifier,
     characterDetail: CharacterDetail?,
     episodes: List<Episode>,
+    isLoading: Boolean,
     widthSizeClass: WindowWidthSizeClass,
     onClickLocationItem: (locationId: Int) -> Unit,
     onClickEpisodeItem: (episodeId: Int) -> Unit
@@ -71,15 +73,25 @@ fun CharacterDetailContent(
         }
 
         item {
-
-        }
-
-        items(episodes) {
-            EpisodeItemContent(
-                modifier = Modifier.padding(horizontal = LARGE_PADDING),
-                episode = it, onClickEpisodeItem = { onClickEpisodeItem(it) }
+            CharacterDetailSubtitleText(
+                modifier = Modifier.padding(start = LARGE_PADDING, bottom = MEDIUM_PADDING),
+                subtitle = R.string.episodes
             )
         }
+
+        if (isLoading) {
+            item {
+                EpisodeItemShimmerEffect()
+            }
+        } else {
+            items(episodes) {
+                EpisodeItemContent(
+                    modifier = Modifier.padding(horizontal = LARGE_PADDING),
+                    episode = it, onClickEpisodeItem = { onClickEpisodeItem(it) }
+                )
+            }
+        }
+
 
     }
 }
@@ -174,6 +186,23 @@ fun HeaderSection(
 
 }
 
+
+@Composable
+fun CharacterDetailSubtitleText(
+    modifier: Modifier = Modifier,
+    @StringRes subtitle: Int
+) {
+    CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.disabled) {
+        Text(
+            modifier = modifier,
+            text = stringResource(subtitle),
+            style = MaterialTheme.typography.h6,
+            fontSize = MaterialTheme.typography.h6.fontSize,
+            fontWeight = FontWeight.Bold
+        )
+    }
+}
+
 @Composable
 fun InformationSection(
     modifier: Modifier = Modifier,
@@ -186,15 +215,7 @@ fun InformationSection(
                 .fillMaxWidth()
                 .padding(horizontal = LARGE_PADDING)
         ) {
-            CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.disabled) {
-                Text(
-                    modifier = modifier,
-                    text = "Informations",
-                    style = MaterialTheme.typography.h6,
-                    fontSize = MaterialTheme.typography.h6.fontSize,
-                    fontWeight = FontWeight.Bold
-                )
-            }
+            CharacterDetailSubtitleText(subtitle = R.string.informations)
 
             InformationContent(
                 subtitle = R.string.gender,

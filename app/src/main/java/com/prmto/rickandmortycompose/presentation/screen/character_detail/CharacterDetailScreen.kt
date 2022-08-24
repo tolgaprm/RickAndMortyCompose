@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.annotation.ExperimentalCoilApi
+import com.prmto.rickandmortycompose.presentation.components.ErrorScreen
 
 @ExperimentalUnitApi
 @ExperimentalCoilApi
@@ -17,17 +18,24 @@ fun CharacterDetailScreen(
     val state = viewModel.characterDetailState.value
 
 
-    CharacterDetailContent(
-        characterDetail = state.character,
-        episodes = state.episodes,
-        widthSizeClass = widthSizeClass,
-        onClickLocationItem = { locationId ->
-            Log.d("CharacterDetail", locationId.toString())
-        },
-        onClickEpisodeItem = { episodeId ->
-            Log.d("CharacterDetail", episodeId.toString())
-        }
-    )
+    if (state.isError) {
+        ErrorScreen(onRetryClick = {
+            viewModel.onClickRetry()
+        })
+    } else {
+        CharacterDetailContent(
+            characterDetail = state.character,
+            episodes = state.episodes,
+            widthSizeClass = widthSizeClass,
+            isLoading = state.isLoading,
+            onClickLocationItem = { locationId ->
+                Log.d("CharacterDetail", locationId.toString())
+            },
+            onClickEpisodeItem = { episodeId ->
+                Log.d("CharacterDetail", episodeId.toString())
+            }
+        )
+    }
 
 
 }
