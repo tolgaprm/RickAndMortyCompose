@@ -15,3 +15,15 @@ data class CharacterDetail(
     val image: String,
     val episode: List<String>
 )
+
+
+fun CharacterDetail.toCharacter(): Character {
+    return Character(
+        id = id,
+        name = name,
+        status = status,
+        image = image,
+        species = species,
+        gender = gender
+    )
+}

@@ -24,6 +24,7 @@ object Constant {
     const val ITEMS_PER_PAGE = 40
 
     const val CHARACTER_DETAIL_ARGUMENT_KEY = "characterId"
+    const val LOCATION_DETAIL_ARGUMENT_KEY = "locationId"
 
     const val LOCATION_LIST_GRID_CELL = 2
 

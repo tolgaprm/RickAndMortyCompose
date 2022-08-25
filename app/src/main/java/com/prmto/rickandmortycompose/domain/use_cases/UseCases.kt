@@ -5,6 +5,7 @@ import com.prmto.rickandmortycompose.domain.use_cases.get_all_episodes.GetAllEpi
 import com.prmto.rickandmortycompose.domain.use_cases.get_all_locations.GetAllLocationsUseCase
 import com.prmto.rickandmortycompose.domain.use_cases.get_character_detail.GetCharacterDetailUseCase
 import com.prmto.rickandmortycompose.domain.use_cases.get_episode.GetEpisodeUseCase
+import com.prmto.rickandmortycompose.domain.use_cases.get_location_detail.GetLocationDetailUseCase
 
 data class UseCases(
     val getAllCharactersUseCase: GetAllCharactersUseCase,
@@ -12,4 +13,5 @@ data class UseCases(
     val getAllEpisodesUseCase: GetAllEpisodesUseCase,
     val getCharacterDetailUseCase: GetCharacterDetailUseCase,
     val getEpisodeUseCase: GetEpisodeUseCase,
+    val getLocationDetailUseCase: GetLocationDetailUseCase,
 )

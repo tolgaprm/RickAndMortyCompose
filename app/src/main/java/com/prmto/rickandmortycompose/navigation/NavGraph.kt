@@ -15,7 +15,9 @@ import com.prmto.rickandmortycompose.presentation.screen.character.CharacterScre
 import com.prmto.rickandmortycompose.presentation.screen.character_detail.CharacterDetailScreen
 import com.prmto.rickandmortycompose.presentation.screen.episode.EpisodeScreen
 import com.prmto.rickandmortycompose.presentation.screen.location.LocationScreen
+import com.prmto.rickandmortycompose.presentation.screen.location_detail.LocationDetailScreen
 import com.prmto.rickandmortycompose.util.Constant.CHARACTER_DETAIL_ARGUMENT_KEY
+import com.prmto.rickandmortycompose.util.Constant.LOCATION_DETAIL_ARGUMENT_KEY
 
 @ExperimentalCoilApi
 @ExperimentalMaterialApi
@@ -55,11 +57,24 @@ fun NavGraph(
         composable(Screen.Location.route) {
             LocationScreen(
                 widthSizeClass = widthSizeClass
-            )
+            ) { locationId ->
+                navController.navigate(Screen.LocationDetail.passLocationId(locationId))
+            }
         }
 
-        composable(Screen.LocationDetail.route) {
-
+        composable(
+            Screen.LocationDetail.route,
+            arguments = listOf(navArgument(
+                name = LOCATION_DETAIL_ARGUMENT_KEY
+            ) {
+                type = NavType.IntType
+            })
+        ) {
+            LocationDetailScreen(
+                widthSizeClass = widthSizeClass
+            ) { characterId ->
+                navController.navigate(Screen.CharacterDetail.passCharacterId(characterId))
+            }
         }
 
         composable(Screen.Episode.route) {

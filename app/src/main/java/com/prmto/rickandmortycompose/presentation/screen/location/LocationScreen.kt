@@ -10,15 +10,14 @@ import androidx.paging.compose.collectAsLazyPagingItems
 @Composable
 fun LocationScreen(
     locationViewModel: LocationViewModel = hiltViewModel(),
-    widthSizeClass: WindowWidthSizeClass
+    widthSizeClass: WindowWidthSizeClass,
+    onNavigateToLocationScreen: (locationId: Int) -> Unit
 ) {
     val locations = locationViewModel.locations.collectAsLazyPagingItems()
 
     LocationList(
         locations = locations,
         widthSizeClass = widthSizeClass,
-        onClickItem = {
-
-        }
+        onClickItem = onNavigateToLocationScreen
     )
 }

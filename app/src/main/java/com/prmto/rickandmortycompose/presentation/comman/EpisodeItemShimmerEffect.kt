@@ -1,8 +1,9 @@
-package com.prmto.rickandmortycompose.presentation.components
+package com.prmto.rickandmortycompose.presentation.comman
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -14,15 +15,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Gray
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.prmto.rickandmortycompose.presentation.ui.theme.LARGE_PADDING
-import com.prmto.rickandmortycompose.presentation.ui.theme.MEDIUM_PADDING
-import com.prmto.rickandmortycompose.presentation.ui.theme.SMALL_PADDING
-import com.prmto.rickandmortycompose.presentation.ui.theme.Shapes
+import com.prmto.rickandmortycompose.presentation.ui.theme.*
 
 @Composable
 fun EpisodeItemShimmerEffect() {
 
-    repeat(3){
+    repeat(6){
         AnimatedEpisodeShimmerEffect()
     }
 
@@ -76,7 +74,7 @@ fun EpisodeItemShimmerEffectContent(
                         .alpha(alpha = alpha)
                         .fillMaxWidth(0.5f)
                         .height(10.dp),
-                    color = Gray,
+                    color = MaterialTheme.colors.shimmerEffectColor,
                     shape = Shapes.medium
                 ) {}
                 Spacer(modifier = Modifier.padding(SMALL_PADDING))
@@ -85,7 +83,7 @@ fun EpisodeItemShimmerEffectContent(
                         .alpha(alpha = alpha)
                         .fillMaxWidth(0.3f)
                         .height(15.dp),
-                    color = Gray,
+                    color =  MaterialTheme.colors.shimmerEffectColor,
                     shape = Shapes.medium
                 ) {}
                 Spacer(modifier = Modifier.padding(SMALL_PADDING))
@@ -94,7 +92,7 @@ fun EpisodeItemShimmerEffectContent(
                         .alpha(alpha = alpha)
                         .fillMaxWidth(0.7f)
                         .height(15.dp),
-                    color = Gray,
+                    color =  MaterialTheme.colors.shimmerEffectColor,
                     shape = Shapes.medium
                 ) {}
             }
@@ -104,7 +102,7 @@ fun EpisodeItemShimmerEffectContent(
                     .alpha(alpha = alpha)
                     .size(28.dp)
                     .clip(CircleShape),
-                color = Gray
+                color =  MaterialTheme.colors.shimmerEffectColor
             ) {
 
             }

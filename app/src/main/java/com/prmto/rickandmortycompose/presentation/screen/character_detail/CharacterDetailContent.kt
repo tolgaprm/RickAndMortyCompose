@@ -33,7 +33,7 @@ import com.prmto.rickandmortycompose.R
 import com.prmto.rickandmortycompose.domain.model.CharacterDetail
 import com.prmto.rickandmortycompose.domain.model.Episode
 import com.prmto.rickandmortycompose.presentation.components.EpisodeItemContent
-import com.prmto.rickandmortycompose.presentation.components.EpisodeItemShimmerEffect
+import com.prmto.rickandmortycompose.presentation.comman.EpisodeItemShimmerEffect
 import com.prmto.rickandmortycompose.presentation.ui.theme.*
 
 @ExperimentalUnitApi
@@ -123,7 +123,7 @@ fun HeaderSection(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(CHARACTER_DETAIL_HEADER_HEIGHT)
-                .background(color = MaterialTheme.colors.characterDetailHeaderBackgroundColor),
+                .background(color = MaterialTheme.colors.detailHeaderBackgroundColor),
         ) {
             Image(
                 modifier = modifier

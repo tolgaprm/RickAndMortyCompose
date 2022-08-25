@@ -11,16 +11,13 @@ import com.prmto.rickandmortycompose.data.paging_source.EpisodeRemoteMediator
 import com.prmto.rickandmortycompose.data.paging_source.LocationsRemoteMediator
 import com.prmto.rickandmortycompose.data.remote.dto.toCharacterDetail
 import com.prmto.rickandmortycompose.data.remote.dto.toEpisode
-import com.prmto.rickandmortycompose.domain.model.Character
-import com.prmto.rickandmortycompose.domain.model.CharacterDetail
-import com.prmto.rickandmortycompose.domain.model.Episode
-import com.prmto.rickandmortycompose.domain.model.Location
+import com.prmto.rickandmortycompose.data.remote.dto.toLocationDetail
+import com.prmto.rickandmortycompose.domain.model.*
 import com.prmto.rickandmortycompose.domain.repository.RemoteDataSource
 import com.prmto.rickandmortycompose.util.Constant.ITEMS_PER_PAGE
 import com.prmto.rickandmortycompose.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import retrofit2.HttpException
 import javax.inject.Inject
 
 @ExperimentalPagingApi
@@ -83,5 +80,21 @@ class RemoteDataSourceImpl @Inject constructor(
     override suspend fun getEpisode(episodeId: Int): Episode {
         return rickAndMortyAPI.getEpisode(id = episodeId).toEpisode()
     }
+
+    override fun getLocation(locationId: Int): Flow<Resource<LocationDetail>> {
+        return flow {
+            try {
+                emit(Resource.Loading())
+                val response = rickAndMortyAPI.getLocation(id = locationId)
+                val locationDetail = response.toLocationDetail()
+                emit(Resource.Success(data = locationDetail))
+
+            } catch (e: Exception) {
+                emit(Resource.Error(message = "Does not have a internet connection"))
+            }
+        }
+    }
+
+
 
 }

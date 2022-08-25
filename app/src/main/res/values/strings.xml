@@ -20,5 +20,6 @@
     <string name="retry">Retry</string>
     <string name="episodes">Episodes</string>
     <string name="informations">Informations</string>
+    <string name="location_detail">Location Detail</string>
 
 </resources>

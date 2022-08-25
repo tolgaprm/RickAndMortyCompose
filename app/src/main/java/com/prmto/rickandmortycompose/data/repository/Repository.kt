@@ -1,10 +1,7 @@
 package com.prmto.rickandmortycompose.data.repository
 
 import androidx.paging.PagingData
-import com.prmto.rickandmortycompose.domain.model.Character
-import com.prmto.rickandmortycompose.domain.model.CharacterDetail
-import com.prmto.rickandmortycompose.domain.model.Episode
-import com.prmto.rickandmortycompose.domain.model.Location
+import com.prmto.rickandmortycompose.domain.model.*
 import com.prmto.rickandmortycompose.domain.repository.RemoteDataSource
 import com.prmto.rickandmortycompose.util.Resource
 import kotlinx.coroutines.flow.Flow
@@ -32,5 +29,9 @@ class Repository @Inject constructor(
 
     suspend fun getEpisode(episodeId: Int): Episode {
         return remoteDataSource.getEpisode(episodeId = episodeId)
+    }
+
+    fun getLocation(locationId: Int): Flow<Resource<LocationDetail>> {
+        return remoteDataSource.getLocation(locationId = locationId)
     }
 }

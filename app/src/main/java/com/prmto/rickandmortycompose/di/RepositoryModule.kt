@@ -7,6 +7,7 @@ import com.prmto.rickandmortycompose.domain.use_cases.get_all_episodes.GetAllEpi
 import com.prmto.rickandmortycompose.domain.use_cases.get_all_locations.GetAllLocationsUseCase
 import com.prmto.rickandmortycompose.domain.use_cases.get_character_detail.GetCharacterDetailUseCase
 import com.prmto.rickandmortycompose.domain.use_cases.get_episode.GetEpisodeUseCase
+import com.prmto.rickandmortycompose.domain.use_cases.get_location_detail.GetLocationDetailUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,7 +28,8 @@ object RepositoryModule {
             getAllLocationsUseCase = GetAllLocationsUseCase(repository),
             getAllEpisodesUseCase = GetAllEpisodesUseCase(repository),
             getCharacterDetailUseCase = GetCharacterDetailUseCase(repository),
-            getEpisodeUseCase = GetEpisodeUseCase(repository)
+            getEpisodeUseCase = GetEpisodeUseCase(repository),
+            getLocationDetailUseCase = GetLocationDetailUseCase(repository)
         )
     }
 }
