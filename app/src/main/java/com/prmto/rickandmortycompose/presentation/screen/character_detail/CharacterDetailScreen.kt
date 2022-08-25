@@ -13,7 +13,8 @@ import com.prmto.rickandmortycompose.presentation.components.ErrorScreen
 @Composable
 fun CharacterDetailScreen(
     viewModel: CharacterDetailViewModel = hiltViewModel(),
-    widthSizeClass: WindowWidthSizeClass
+    widthSizeClass: WindowWidthSizeClass,
+    onClickLocationItem: (locationId: Int) -> Unit
 ) {
     val state = viewModel.characterDetailState.value
 
@@ -28,9 +29,7 @@ fun CharacterDetailScreen(
             episodes = state.episodes,
             widthSizeClass = widthSizeClass,
             isLoading = state.isLoading,
-            onClickLocationItem = { locationId ->
-                Log.d("CharacterDetail", locationId.toString())
-            },
+            onClickLocationItem = onClickLocationItem,
             onClickEpisodeItem = { episodeId ->
                 Log.d("CharacterDetail", episodeId.toString())
             }

@@ -12,6 +12,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.compose.ui.unit.dp
@@ -177,4 +178,39 @@ fun DetailHeader(
         }
     }
 
+}
+
+@ExperimentalCoilApi
+@ExperimentalUnitApi
+@Preview
+@Composable
+fun DetailHeaderLocationPreview() {
+    DetailHeader(
+        widthSizeClass = WindowWidthSizeClass.Compact,
+        headerHeight = 130.dp,
+        locationHeader = LocationDetail(
+            id = 1,
+            name = "Earth (C-137)",
+            type = "Planet",
+            residents = emptyList()
+        )
+    )
+}
+
+@ExperimentalCoilApi
+@ExperimentalUnitApi
+@Preview
+@Composable
+fun DetailHeaderEpisodePreview() {
+    DetailHeader(
+        widthSizeClass = WindowWidthSizeClass.Compact,
+        headerHeight = 130.dp,
+        episodeHeader = EpisodeDetail(
+            id = 1,
+            name = "Anatomy Park",
+            air_date = "December 9, 2013",
+            episode = "S01E03",
+            characters = emptyList(),
+        )
+    )
 }

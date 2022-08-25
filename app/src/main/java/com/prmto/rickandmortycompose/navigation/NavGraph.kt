@@ -50,7 +50,10 @@ fun NavGraph(
             )
         ) {
             CharacterDetailScreen(
-                widthSizeClass = widthSizeClass
+                widthSizeClass = widthSizeClass,
+                onClickLocationItem = { locationId ->
+                    navController.navigate(Screen.LocationDetail.passLocationId(locationId))
+                }
             )
         }
 
