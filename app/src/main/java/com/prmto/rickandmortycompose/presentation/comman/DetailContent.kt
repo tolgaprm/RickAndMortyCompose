@@ -52,13 +52,11 @@ fun DetailContent(
         Column {
             if (locationHeader != null) {
                 DetailHeader(
-                    widthSizeClass = widthSizeClass,
                     locationHeader = locationHeader,
                     headerHeight = 130.dp
                 )
             } else if (episodeHeader != null) {
                 DetailHeader(
-                    widthSizeClass = widthSizeClass,
                     episodeHeader = episodeHeader,
                     headerHeight = 130.dp
                 )
@@ -85,13 +83,11 @@ fun DetailContent(
             val size by animateDpAsState(targetValue = max(0.dp, 130.dp * offset.value))
             if (locationHeader != null) {
                 DetailHeader(
-                    widthSizeClass = widthSizeClass,
                     locationHeader = locationHeader,
                     headerHeight = size
                 )
             } else if (episodeHeader != null) {
                 DetailHeader(
-                    widthSizeClass = widthSizeClass,
                     episodeHeader = episodeHeader,
                     headerHeight = size
                 )
@@ -122,7 +118,6 @@ fun DetailContent(
 @Composable
 fun DetailHeader(
     modifier: Modifier = Modifier,
-    widthSizeClass: WindowWidthSizeClass,
     locationHeader: LocationDetail? = null,
     episodeHeader: EpisodeDetail? = null,
     headerHeight: Dp
@@ -150,6 +145,7 @@ fun DetailHeader(
 
                 Spacer(modifier = Modifier.height(SMALL_PADDING))
                 Text(
+                    modifier = Modifier.padding(horizontal = SMALL_PADDING),
                     text = locationHeader.name,
                     style = MaterialTheme.typography.h4,
                     textAlign = TextAlign.Center,
@@ -207,7 +203,6 @@ fun DetailHeader(
 @Composable
 fun DetailHeaderLocationPreview() {
     DetailHeader(
-        widthSizeClass = WindowWidthSizeClass.Compact,
         headerHeight = 130.dp,
         locationHeader = LocationDetail(
             id = 1,
@@ -224,7 +219,6 @@ fun DetailHeaderLocationPreview() {
 @Composable
 fun DetailHeaderEpisodePreview() {
     DetailHeader(
-        widthSizeClass = WindowWidthSizeClass.Compact,
         headerHeight = 130.dp,
         episodeHeader = EpisodeDetail(
             id = 1,
