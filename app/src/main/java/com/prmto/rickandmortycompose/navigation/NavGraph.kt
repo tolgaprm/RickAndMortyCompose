@@ -55,6 +55,9 @@ fun NavGraph(
                 widthSizeClass = widthSizeClass,
                 onClickLocationItem = { locationId ->
                     navController.navigate(Screen.LocationDetail.passLocationId(locationId))
+                },
+                onClickEpisodeItem = { episodeId ->
+                    navController.navigate(Screen.EpisodeDetail.passEpisodeId(episodeId))
                 }
             )
         }

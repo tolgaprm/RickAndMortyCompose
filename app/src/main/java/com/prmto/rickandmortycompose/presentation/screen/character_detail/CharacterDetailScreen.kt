@@ -1,6 +1,5 @@
 package com.prmto.rickandmortycompose.presentation.screen.character_detail
 
-import android.util.Log
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.ExperimentalUnitApi
@@ -14,7 +13,8 @@ import com.prmto.rickandmortycompose.presentation.components.ErrorScreen
 fun CharacterDetailScreen(
     viewModel: CharacterDetailViewModel = hiltViewModel(),
     widthSizeClass: WindowWidthSizeClass,
-    onClickLocationItem: (locationId: Int) -> Unit
+    onClickLocationItem: (locationId: Int) -> Unit,
+    onClickEpisodeItem: (episodeId: Int) -> Unit
 ) {
     val state = viewModel.characterDetailState.value
 
@@ -30,9 +30,7 @@ fun CharacterDetailScreen(
             widthSizeClass = widthSizeClass,
             isLoading = state.isLoading,
             onClickLocationItem = onClickLocationItem,
-            onClickEpisodeItem = { episodeId ->
-                Log.d("CharacterDetail", episodeId.toString())
-            }
+            onClickEpisodeItem = onClickEpisodeItem
         )
     }
 
