@@ -19,5 +19,5 @@ interface RemoteDataSource {
 
     fun getLocation(locationId: Int): Flow<Resource<LocationDetail>>
 
-
+    fun getEpisodeDetail(episodeId: Int): Flow<Resource<EpisodeDetail>>
 }

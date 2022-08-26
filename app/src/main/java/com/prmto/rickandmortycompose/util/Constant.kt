@@ -25,6 +25,7 @@ object Constant {
 
     const val CHARACTER_DETAIL_ARGUMENT_KEY = "characterId"
     const val LOCATION_DETAIL_ARGUMENT_KEY = "locationId"
+    const val EPISODE_DETAIL_ARGUMENT_KEY = "episodeId"
 
     const val LOCATION_LIST_GRID_CELL = 2
 

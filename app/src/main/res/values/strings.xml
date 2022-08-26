@@ -21,5 +21,6 @@
     <string name="episodes">Episodes</string>
     <string name="informations">Informations</string>
     <string name="location_detail">Location Detail</string>
+    <string name="episode_detail">Episode Detail</string>
 
 </resources>

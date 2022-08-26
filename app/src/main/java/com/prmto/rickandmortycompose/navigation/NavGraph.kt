@@ -14,9 +14,11 @@ import coil.annotation.ExperimentalCoilApi
 import com.prmto.rickandmortycompose.presentation.screen.character.CharacterScreen
 import com.prmto.rickandmortycompose.presentation.screen.character_detail.CharacterDetailScreen
 import com.prmto.rickandmortycompose.presentation.screen.episode.EpisodeScreen
+import com.prmto.rickandmortycompose.presentation.screen.episode_detail.EpisodeDetailScreen
 import com.prmto.rickandmortycompose.presentation.screen.location.LocationScreen
 import com.prmto.rickandmortycompose.presentation.screen.location_detail.LocationDetailScreen
 import com.prmto.rickandmortycompose.util.Constant.CHARACTER_DETAIL_ARGUMENT_KEY
+import com.prmto.rickandmortycompose.util.Constant.EPISODE_DETAIL_ARGUMENT_KEY
 import com.prmto.rickandmortycompose.util.Constant.LOCATION_DETAIL_ARGUMENT_KEY
 
 @ExperimentalCoilApi
@@ -80,11 +82,28 @@ fun NavGraph(
             }
         }
 
-        composable(Screen.Episode.route) {
-            EpisodeScreen()
+        composable(
+            Screen.Episode.route
+        ) {
+            EpisodeScreen() { episodeId ->
+                navController.navigate(Screen.EpisodeDetail.passEpisodeId(episodeId))
+            }
         }
-        composable(Screen.EpisodeDetail.route) {
 
+        composable(Screen.EpisodeDetail.route,
+            arguments = listOf(
+                navArgument(
+                    name = EPISODE_DETAIL_ARGUMENT_KEY
+                ) {
+                    type = NavType.IntType
+                }
+            )) {
+            EpisodeDetailScreen(
+                widthSizeClass = widthSizeClass,
+                onClickCharacterItem = { characterId ->
+                    navController.navigate(Screen.CharacterDetail.passCharacterId(characterId))
+                }
+            )
         }
 
 

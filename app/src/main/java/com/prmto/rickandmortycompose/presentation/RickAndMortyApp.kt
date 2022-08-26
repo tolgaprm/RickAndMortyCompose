@@ -170,6 +170,7 @@ fun NavDestination?.getLabelResId(): Int {
         Screen.Episode.route -> BottomNavItemData.Episode.name
         Screen.CharacterDetail.route -> R.string.character_detail
         Screen.LocationDetail.route -> R.string.location_detail
+        Screen.EpisodeDetail.route -> R.string.episode_detail
         else -> {
             BottomNavItemData.Character.name
         }

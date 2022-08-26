@@ -12,6 +12,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.ExperimentalUnitApi
@@ -24,6 +25,7 @@ import com.prmto.rickandmortycompose.domain.model.LocationDetail
 import com.prmto.rickandmortycompose.presentation.components.CharacterItemForGridView
 import com.prmto.rickandmortycompose.presentation.components.ErrorScreen
 import com.prmto.rickandmortycompose.presentation.ui.theme.LARGE_PADDING
+import com.prmto.rickandmortycompose.presentation.ui.theme.MEDIUM_PADDING
 import com.prmto.rickandmortycompose.presentation.ui.theme.SMALL_PADDING
 import com.prmto.rickandmortycompose.presentation.ui.theme.detailHeaderBackgroundColor
 import kotlin.math.min
@@ -48,12 +50,20 @@ fun DetailContent(
         )
     } else if (isLoading) {
         Column {
+            if (locationHeader != null) {
+                DetailHeader(
+                    widthSizeClass = widthSizeClass,
+                    locationHeader = locationHeader,
+                    headerHeight = 130.dp
+                )
+            } else if (episodeHeader != null) {
+                DetailHeader(
+                    widthSizeClass = widthSizeClass,
+                    episodeHeader = episodeHeader,
+                    headerHeight = 130.dp
+                )
+            }
 
-            DetailHeader(
-                widthSizeClass = widthSizeClass,
-                locationHeader = locationHeader,
-                headerHeight = 130.dp
-            )
             CharacterItemShimmerEffect()
         }
 
@@ -73,11 +83,19 @@ fun DetailContent(
 
 
             val size by animateDpAsState(targetValue = max(0.dp, 130.dp * offset.value))
-            DetailHeader(
-                widthSizeClass = widthSizeClass,
-                locationHeader = locationHeader,
-                headerHeight = size
-            )
+            if (locationHeader != null) {
+                DetailHeader(
+                    widthSizeClass = widthSizeClass,
+                    locationHeader = locationHeader,
+                    headerHeight = size
+                )
+            } else if (episodeHeader != null) {
+                DetailHeader(
+                    widthSizeClass = widthSizeClass,
+                    episodeHeader = episodeHeader,
+                    headerHeight = size
+                )
+            }
 
             LazyVerticalGrid(
                 columns = GridCells.Adaptive(170.dp),
@@ -134,6 +152,7 @@ fun DetailHeader(
                 Text(
                     text = locationHeader.name,
                     style = MaterialTheme.typography.h4,
+                    textAlign = TextAlign.Center,
                     fontSize = MaterialTheme.typography.h4.fontSize,
                     fontWeight = FontWeight.Normal
                 )
@@ -160,9 +179,11 @@ fun DetailHeader(
                 }
                 Spacer(modifier = Modifier.height(SMALL_PADDING))
                 Text(
+                    modifier = Modifier.padding(horizontal = MEDIUM_PADDING),
                     text = episodeHeader.name,
                     style = MaterialTheme.typography.h4,
                     fontSize = MaterialTheme.typography.h4.fontSize,
+                    textAlign = TextAlign.Center,
                     fontWeight = FontWeight.Normal
                 )
                 Spacer(modifier = Modifier.height(SMALL_PADDING))

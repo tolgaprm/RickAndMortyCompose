@@ -30,7 +30,6 @@ interface RickAndMortyAPI {
         @Path("id") id: Int
     ): LocationDto
 
-
     @GET("episode")
     suspend fun getAllEpisodes(
         @Query("page") page: Int? = null

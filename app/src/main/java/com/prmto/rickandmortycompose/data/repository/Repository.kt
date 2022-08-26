@@ -34,4 +34,8 @@ class Repository @Inject constructor(
     fun getLocation(locationId: Int): Flow<Resource<LocationDetail>> {
         return remoteDataSource.getLocation(locationId = locationId)
     }
+
+    fun getEpisodeDetail(episodeId: Int): Flow<Resource<EpisodeDetail>> {
+        return remoteDataSource.getEpisodeDetail(episodeId = episodeId)
+    }
 }

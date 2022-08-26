@@ -11,12 +11,14 @@ import com.prmto.rickandmortycompose.data.paging_source.EpisodeRemoteMediator
 import com.prmto.rickandmortycompose.data.paging_source.LocationsRemoteMediator
 import com.prmto.rickandmortycompose.data.remote.dto.toCharacterDetail
 import com.prmto.rickandmortycompose.data.remote.dto.toEpisode
+import com.prmto.rickandmortycompose.data.remote.dto.toEpisodeDetail
 import com.prmto.rickandmortycompose.data.remote.dto.toLocationDetail
 import com.prmto.rickandmortycompose.domain.model.*
 import com.prmto.rickandmortycompose.domain.repository.RemoteDataSource
 import com.prmto.rickandmortycompose.util.Constant.ITEMS_PER_PAGE
 import com.prmto.rickandmortycompose.util.Resource
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
@@ -65,15 +67,13 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override fun getCharacter(characterId: Int): Flow<Resource<CharacterDetail>> {
         return flow {
-            try {
-                emit(Resource.Loading())
-                val response = rickAndMortyAPI.getCharacter(id = characterId)
-                val characterDetail = response.toCharacterDetail()
-                emit(Resource.Success(data = characterDetail))
+            emit(Resource.Loading())
+            val response = rickAndMortyAPI.getCharacter(id = characterId)
+            val characterDetail = response.toCharacterDetail()
+            emit(Resource.Success(data = characterDetail))
 
-            } catch (e: Exception) {
-                emit(Resource.Error(message = "Does not have a internet connection"))
-            }
+        }.catch {
+            emit(Resource.Error(message = "Does not have a internet connection"))
         }
     }
 
@@ -83,18 +83,26 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override fun getLocation(locationId: Int): Flow<Resource<LocationDetail>> {
         return flow {
-            try {
-                emit(Resource.Loading())
-                val response = rickAndMortyAPI.getLocation(id = locationId)
-                val locationDetail = response.toLocationDetail()
-                emit(Resource.Success(data = locationDetail))
-
-            } catch (e: Exception) {
-                emit(Resource.Error(message = "Does not have a internet connection"))
-            }
+            emit(Resource.Loading())
+            val response = rickAndMortyAPI.getLocation(id = locationId)
+            val locationDetail = response.toLocationDetail()
+            emit(Resource.Success(data = locationDetail))
+        }.catch {
+            emit(Resource.Error(message = "Does not have a internet connection"))
         }
     }
 
+    override fun getEpisodeDetail(episodeId: Int): Flow<Resource<EpisodeDetail>> {
+        return flow {
+            emit(Resource.Loading())
+            val response = rickAndMortyAPI.getEpisode(episodeId)
+            val episodeDetail = response.toEpisodeDetail()
+            emit(Resource.Success(data = episodeDetail))
+
+        }.catch {
+            emit(Resource.Error(message = "Does not have a internet connection"))
+        }
+    }
 
 
 }

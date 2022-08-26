@@ -26,11 +26,11 @@ fun List<EpisodeDto>.toEpisode(): List<Episode> {
 
 fun EpisodeDto.toEpisode(): Episode {
     return Episode(
-            id = id,
-            name = name,
-            air_date = air_date,
-            episode = episode
-        )
+        id = id,
+        name = name,
+        air_date = air_date,
+        episode = episode,
+    )
 
 }
 
