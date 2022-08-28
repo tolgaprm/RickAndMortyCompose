@@ -108,27 +108,34 @@ fun RickAndMortyApp(
         Column {
             if (widthSizeClass.isMediumScreen() || widthSizeClass.isExpandedScreen()) {
                 Row {
-                    NavRail(
-                        bottomNavItems = bottomNavItems,
-                        currentDestination = currentDestination,
-                        icons = icons,
-                        onHeaderClick = {
-                            currentDestination?.let {
-                                if (it.route != Screen.Character.route) {
-                                    navController.navigate(Screen.Character.route)
-                                    icons[CHARACTER_ICON_INDEX] =
-                                        BottomNavItemData.Character.selectedIcon
+                    currentDestination?.let {
+                        currentDestination.route?.let { route ->
+                            if (bottomNavItems.any { it.route == route }) {
+                                NavRail(
+                                    bottomNavItems = bottomNavItems,
+                                    currentDestination = currentDestination,
+                                    icons = icons,
+                                    onHeaderClick = {
+                                        currentDestination.let {
+                                            if (it.route != Screen.Character.route) {
+                                                navController.navigate(Screen.Character.route)
+                                                icons[CHARACTER_ICON_INDEX] =
+                                                    BottomNavItemData.Character.selectedIcon
+                                            }
+                                        }
+
+                                    }
+                                ) { route ->
+                                    navController.navigate(route = route) {
+                                        popUpTo(navController.graph.findStartDestination().id) {
+                                            saveState = true
+                                        }
+
+                                        launchSingleTop = true
+                                    }
                                 }
-                            }
 
-                        }
-                    ) { route ->
-                        navController.navigate(route = route) {
-                            popUpTo(navController.graph.findStartDestination().id) {
-                                saveState = true
                             }
-
-                            launchSingleTop = true
                         }
                     }
 
@@ -138,8 +145,8 @@ fun RickAndMortyApp(
                     )
 
                 }
-
             }
+
 
             if (widthSizeClass.isCompactScreen()) {
                 BottomNav(
@@ -159,9 +166,8 @@ fun RickAndMortyApp(
                 }
             }
         }
-
     }
-}
+    }
 
 fun NavDestination?.getLabelResId(): Int {
     return when (this?.route) {
