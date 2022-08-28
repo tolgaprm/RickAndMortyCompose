@@ -1,18 +1,18 @@
 package com.prmto.rickandmortycompose.presentation.screen.episode_detail
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.prmto.rickandmortycompose.domain.model.Character
 import com.prmto.rickandmortycompose.domain.model.toCharacter
 import com.prmto.rickandmortycompose.domain.use_cases.UseCases
-import com.prmto.rickandmortycompose.util.Constant
 import com.prmto.rickandmortycompose.util.Constant.EPISODE_DETAIL_ARGUMENT_KEY
 import com.prmto.rickandmortycompose.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,8 +22,9 @@ class EpisodeDetailViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val _state = mutableStateOf<EpisodeDetailState>(EpisodeDetailState())
-    val state: State<EpisodeDetailState> get() = _state
+    private val _state = MutableStateFlow<EpisodeDetailState>(EpisodeDetailState())
+    val state: StateFlow<EpisodeDetailState> get() = _state
+
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
@@ -34,11 +35,10 @@ class EpisodeDetailViewModel @Inject constructor(
         }
     }
 
-    fun onRetryClick(){
+    fun onRetryClick() {
         val episodeId = savedStateHandle.get<Int>(EPISODE_DETAIL_ARGUMENT_KEY)
-        _state.value = _state.value.copy(
-            isError = false
-        )
+        _state.update { it.copy(isError = false) }
+
         episodeId?.let {
             getEpisode(episodeId = it)
         }
@@ -50,20 +50,14 @@ class EpisodeDetailViewModel @Inject constructor(
                 .collect {
                     when (it) {
                         is Resource.Loading -> {
-                            _state.value = _state.value.copy(isLoading = true)
+                            _state.update { it.copy(isLoading = true) }
                         }
                         is Resource.Success -> {
-                            _state.value = _state.value.copy(
-                                episodeDetail = it.data,
-                            )
-
+                            _state.update { state -> state.copy(episodeDetail = it.data) }
                             it.data?.let { data -> getCharacter(data.characters) }
                         }
                         is Resource.Error -> {
-                            _state.value = _state.value.copy(
-                                isLoading = false,
-                                isError = true
-                            )
+                            _state.update { it.copy(isLoading = false, isError = true) }
                         }
                     }
                 }
@@ -72,7 +66,7 @@ class EpisodeDetailViewModel @Inject constructor(
     }
 
     private fun getCharacter(characters: List<String>) {
-        _state.value = _state.value.copy(isLoading = true)
+        _state.update { it.copy(isLoading = true) }
 
         viewModelScope.launch(Dispatchers.IO) {
             val list: MutableList<Character> = mutableListOf()
@@ -85,10 +79,7 @@ class EpisodeDetailViewModel @Inject constructor(
                 }
             }
 
-            _state.value = _state.value.copy(
-                isLoading = false,
-                characters = list
-            )
+            _state.update { it.copy(isLoading = false, characters = list) }
         }
     }
 }

@@ -1,18 +1,18 @@
 package com.prmto.rickandmortycompose.presentation.screen.location_detail
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.prmto.rickandmortycompose.domain.model.Character
 import com.prmto.rickandmortycompose.domain.model.toCharacter
 import com.prmto.rickandmortycompose.domain.use_cases.UseCases
-import com.prmto.rickandmortycompose.util.Constant
 import com.prmto.rickandmortycompose.util.Constant.LOCATION_DETAIL_ARGUMENT_KEY
 import com.prmto.rickandmortycompose.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,8 +22,8 @@ class LocationDetailViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val _state = mutableStateOf<LocationDetailState>(LocationDetailState())
-    val state: State<LocationDetailState> get() = _state
+    private val _state = MutableStateFlow<LocationDetailState>(LocationDetailState())
+    val state: StateFlow<LocationDetailState> get() = _state
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
@@ -37,11 +37,9 @@ class LocationDetailViewModel @Inject constructor(
 
     }
 
-    fun onRetryClick(){
+    fun onRetryClick() {
         val locationId = savedStateHandle.get<Int>(LOCATION_DETAIL_ARGUMENT_KEY)
-        _state.value = _state.value.copy(
-            isError = false
-        )
+        _state.update { it.copy(isError = false) }
         locationId?.let {
             getLocation(locationId = it)
         }
@@ -53,19 +51,14 @@ class LocationDetailViewModel @Inject constructor(
                 .collect {
                     when (it) {
                         is Resource.Loading -> {
-                            _state.value = _state.value.copy(isLoading = true)
+                            _state.update { it.copy(isLoading = true) }
                         }
                         is Resource.Success -> {
-                            _state.value = _state.value.copy(
-                                locationDetail = it.data
-                            )
+                            _state.update { state -> state.copy(locationDetail = it.data) }
                             it.data?.let { data -> getCharacter(data.residents) }
                         }
                         is Resource.Error -> {
-                            _state.value = _state.value.copy(
-                                isLoading = false,
-                                isError = true
-                            )
+                            _state.update { it.copy(isLoading = false, isError = true) }
                         }
                     }
                 }
@@ -73,7 +66,7 @@ class LocationDetailViewModel @Inject constructor(
     }
 
     private fun getCharacter(residents: List<String>) {
-        _state.value = _state.value.copy(isLoading = true)
+        _state.update { it.copy(isLoading = true) }
 
         viewModelScope.launch(Dispatchers.IO) {
             val list: MutableList<Character> = mutableListOf()
@@ -86,10 +79,7 @@ class LocationDetailViewModel @Inject constructor(
                 }
             }
 
-            _state.value = _state.value.copy(
-                isLoading = false,
-                characterList = list
-            )
+            _state.update { it.copy(isLoading = false, characterList = list) }
         }
     }
 }

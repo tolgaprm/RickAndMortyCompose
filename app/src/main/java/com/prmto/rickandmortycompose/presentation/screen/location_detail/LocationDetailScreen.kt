@@ -2,6 +2,7 @@ package com.prmto.rickandmortycompose.presentation.screen.location_detail
 
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.annotation.ExperimentalCoilApi
@@ -15,7 +16,7 @@ fun LocationDetailScreen(
     widthSizeClass: WindowWidthSizeClass,
     onClickCharacterItem: (characterId: Int) -> Unit
 ) {
-    val state = viewModel.state.value
+    val state = viewModel.state.collectAsState().value
 
     DetailContent(
         widthSizeClass = widthSizeClass,
