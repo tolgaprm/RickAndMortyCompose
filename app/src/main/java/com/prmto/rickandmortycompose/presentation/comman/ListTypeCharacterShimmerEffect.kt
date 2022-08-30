@@ -1,6 +1,5 @@
 package com.prmto.rickandmortycompose.presentation.comman
 
-import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -8,7 +7,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -19,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.prmto.rickandmortycompose.presentation.ui.theme.MEDIUM_PADDING
 import com.prmto.rickandmortycompose.presentation.ui.theme.Shapes
 import com.prmto.rickandmortycompose.presentation.ui.theme.shimmerEffectColor
+import com.prmto.rickandmortycompose.util.calculateAlphaInfiniteAnimation
 
 @Composable
 fun CharacterShimmerEffectListType() {
@@ -34,19 +33,7 @@ fun CharacterShimmerEffectListType() {
 @Composable
 fun AnimatedCharacterShimmerEffectListType() {
 
-    val transition = rememberInfiniteTransition()
-
-    val alphaAnim by transition.animateFloat(
-        initialValue = 1f,
-        targetValue = 0f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(
-                durationMillis = 700,
-                easing = FastOutLinearInEasing,
-            ),
-            repeatMode = RepeatMode.Reverse
-        )
-    )
+    val alphaAnim = calculateAlphaInfiniteAnimation()
 
     ListTypeCharacterShimmerEffectItem(alpha = alphaAnim)
 }
