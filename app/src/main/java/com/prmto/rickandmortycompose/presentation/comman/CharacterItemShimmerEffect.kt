@@ -58,7 +58,6 @@ fun CharacterItemShimmerEffectContent(
     Surface(
         modifier = Modifier
             .fillMaxWidth()
-
             .alpha(alpha)
             .height(180.dp)
             .border(1.dp, color =  MaterialTheme.colors.shimmerEffectColor, Shapes.large),

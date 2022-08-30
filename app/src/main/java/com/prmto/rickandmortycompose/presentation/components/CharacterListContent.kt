@@ -1,6 +1,7 @@
 package com.prmto.rickandmortycompose.presentation.components
 
 import android.util.Log
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -33,7 +34,9 @@ import coil.request.ImageRequest
 import com.prmto.rickandmortycompose.R
 import com.prmto.rickandmortycompose.domain.model.Character
 import com.prmto.rickandmortycompose.domain.model.enums.ListType
+import com.prmto.rickandmortycompose.presentation.screen.character.CharacterScreenHeader
 import com.prmto.rickandmortycompose.presentation.ui.theme.*
+import com.prmto.rickandmortycompose.util.handleLoadState
 import com.prmto.rickandmortycompose.util.isExpandedScreen
 import com.prmto.rickandmortycompose.util.isMediumScreen
 
@@ -45,58 +48,86 @@ fun CharacterListContent(
     characters: LazyPagingItems<Character>,
     listType: ListType,
     widthSizeClass: WindowWidthSizeClass,
-    onClickCharacterItem: (Int) -> Unit
-) {
+    @DrawableRes listTypeIconId: Int,
+    onClickListTypeIcon: () -> Unit,
+    onClickCharacterItem: (Int) -> Unit,
+
+    ) {
+
+    val result = handleLoadState(
+        loadState = characters.loadState,
+        listType = listType,
+        onRetryClick = { characters.retry() },
+        isEmptyList = characters.itemCount ==0
+    )
 
     if (listType == ListType.LIST) {
-        LazyColumn(
-            modifier = Modifier.padding(top = 32.dp),
-            contentPadding = PaddingValues(SMALL_PADDING)
-        ) {
-            items(characters) {
-                it?.let {
-                    CharacterItem(
-                        character = it,
-                        widthSizeClass = widthSizeClass,
-                        onClick = {
-                            onClickCharacterItem(it)
-                        }
-                    )
 
-                    Divider(
-                        modifier = Modifier.padding(horizontal = MEDIUM_PADDING)
+        if (result) {
+            LazyColumn(
+                contentPadding = PaddingValues(SMALL_PADDING)
+            ) {
+
+                item {
+                    CharacterScreenHeader(
+                        listTypeIconId = listTypeIconId,
+                        onClickListTypeIcon = onClickListTypeIcon
                     )
+                }
+                items(characters) {
+                    it?.let {
+                        CharacterItem(
+                            character = it,
+                            widthSizeClass = widthSizeClass,
+                            onClick = {
+                                onClickCharacterItem(it)
+                            }
+                        )
+
+                        Divider(
+                            modifier = Modifier.padding(horizontal = MEDIUM_PADDING)
+                        )
+                    }
                 }
             }
         }
+
     } else {
-        LazyVerticalGrid(
-            columns = GridCells.Adaptive(170.dp),
-            modifier = Modifier.padding(top = 32.dp),
-            verticalArrangement = Arrangement.spacedBy(LARGE_PADDING),
-            horizontalArrangement = Arrangement.spacedBy(LARGE_PADDING),
-            contentPadding = PaddingValues(
-                top = LARGE_PADDING,
-                start = LARGE_PADDING,
-                end = LARGE_PADDING,
-                bottom = BOTTOM_NAV_PADDING
-            )
-        ) {
-            items(characters.itemCount) { index ->
-                characters[index]?.let {
-                    CharacterItemForGridView(
-                        character = it,
-                        widthSizeClass = widthSizeClass,
-                        onClick = {
+
+        if (result) {
+            LazyVerticalGrid(
+                columns = GridCells.Adaptive(170.dp),
+                verticalArrangement = Arrangement.spacedBy(LARGE_PADDING),
+                horizontalArrangement = Arrangement.spacedBy(LARGE_PADDING),
+                contentPadding = PaddingValues(
+                    top = LARGE_PADDING,
+                    start = LARGE_PADDING,
+                    end = LARGE_PADDING,
+                    bottom = BOTTOM_NAV_PADDING
+                )
+            ) {
+
+                item {
+                    CharacterScreenHeader(
+                        listTypeIconId = listTypeIconId,
+                        onClickListTypeIcon = onClickListTypeIcon
+                    )
+                }
+                items(characters.itemCount) { index ->
+                    characters[index]?.let { it ->
+                        CharacterItemForGridView(
+                            character = it,
+                            widthSizeClass = widthSizeClass
+                        ) {
                             onClickCharacterItem(it)
                         }
-                    )
+                    }
                 }
             }
         }
+
 
     }
-
 }
 
 

@@ -2,6 +2,7 @@ package com.prmto.rickandmortycompose.presentation.comman
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -20,10 +21,11 @@ import com.prmto.rickandmortycompose.presentation.ui.theme.*
 @Composable
 fun EpisodeItemShimmerEffect() {
 
-    repeat(6){
-        AnimatedEpisodeShimmerEffect()
+    LazyColumn(){
+        items(6){
+            AnimatedEpisodeShimmerEffect()
+        }
     }
-
 
 }
 

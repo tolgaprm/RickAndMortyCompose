@@ -3,7 +3,6 @@ package com.prmto.rickandmortycompose.presentation.components
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
@@ -19,7 +18,9 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.items
 import com.prmto.rickandmortycompose.domain.model.Episode
 import com.prmto.rickandmortycompose.domain.model.EpisodeListItem
+import com.prmto.rickandmortycompose.navigation.Screen
 import com.prmto.rickandmortycompose.presentation.ui.theme.*
+import com.prmto.rickandmortycompose.util.handleLoadState
 
 @Composable
 fun EpisodeListContent(
@@ -27,25 +28,38 @@ fun EpisodeListContent(
     episodes: LazyPagingItems<EpisodeListItem>,
     onClickEpisodeItem: (episodeId: Int) -> Unit
 ) {
-    LazyColumn(
-        modifier = modifier,
-        contentPadding = PaddingValues(
-            top = LARGE_PADDING,
-            start = LARGE_PADDING,
-            end = LARGE_PADDING,
-            bottom = BOTTOM_NAV_PADDING
-        ),
-        verticalArrangement = Arrangement.spacedBy(MEDIUM_PADDING)
-    ) {
-        items(episodes) {
-            it?.let {
-                EpisodeItem(
-                    episode = it,
-                    onClickEpisodeItem = onClickEpisodeItem
-                )
+
+
+    val result = handleLoadState(
+        loadState = episodes.loadState,
+        onRetryClick = { episodes.retry() },
+        whichScreen = Screen.Episode,
+        isEmptyList = episodes.itemCount == 0
+    )
+
+    if (result) {
+        LazyColumn(
+            modifier = modifier,
+            contentPadding = PaddingValues(
+                top = LARGE_PADDING,
+                start = LARGE_PADDING,
+                end = LARGE_PADDING,
+                bottom = BOTTOM_NAV_PADDING
+            ),
+            verticalArrangement = Arrangement.spacedBy(MEDIUM_PADDING)
+        ) {
+            items(episodes) {
+                it?.let {
+                    EpisodeItem(
+                        episode = it,
+                        onClickEpisodeItem = onClickEpisodeItem
+                    )
+                }
             }
         }
     }
+
+
 }
 
 
