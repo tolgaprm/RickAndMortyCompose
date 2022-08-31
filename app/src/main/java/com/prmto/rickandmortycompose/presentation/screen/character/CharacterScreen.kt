@@ -33,17 +33,15 @@ fun CharacterScreen(
 
 
 
-
-    CharacterScreenHeader(listTypeIconId = characterViewModel.listTypeIcon.value) {
-        characterViewModel.onClickListTypeIcon()
-    }
-
-
     CharacterListContent(
         characters = characters,
         listType = characterViewModel.stateListType.value,
         widthSizeClass = widthSizeClass,
-        onClickCharacterItem = onClickCharacterItem
+        onClickCharacterItem = onClickCharacterItem,
+        listTypeIconId = characterViewModel.listTypeIcon.value,
+        onClickListTypeIcon = {
+            characterViewModel.onClickListTypeIcon()
+        }
     )
 
 }

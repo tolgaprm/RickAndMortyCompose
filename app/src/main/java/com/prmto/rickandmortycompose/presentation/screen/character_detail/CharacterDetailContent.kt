@@ -32,6 +32,7 @@ import coil.request.ImageRequest
 import com.prmto.rickandmortycompose.R
 import com.prmto.rickandmortycompose.domain.model.CharacterDetail
 import com.prmto.rickandmortycompose.domain.model.Episode
+import com.prmto.rickandmortycompose.presentation.comman.AnimatedEpisodeShimmerEffect
 import com.prmto.rickandmortycompose.presentation.components.EpisodeItemContent
 import com.prmto.rickandmortycompose.presentation.comman.EpisodeItemShimmerEffect
 import com.prmto.rickandmortycompose.presentation.ui.theme.*
@@ -80,8 +81,8 @@ fun CharacterDetailContent(
         }
 
         if (isLoading) {
-            item {
-                EpisodeItemShimmerEffect()
+            items(6){
+                AnimatedEpisodeShimmerEffect()
             }
         } else {
             items(episodes) {

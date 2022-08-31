@@ -48,14 +48,17 @@ fun CharacterListContent(
     characters: LazyPagingItems<Character>,
     listType: ListType,
     widthSizeClass: WindowWidthSizeClass,
+    @DrawableRes listTypeIconId: Int,
+    onClickListTypeIcon: () -> Unit,
     onClickCharacterItem: (Int) -> Unit,
+
     ) {
 
     val result = handleLoadState(
         loadState = characters.loadState,
         listType = listType,
         onRetryClick = { characters.retry() },
-        isEmptyList = characters.itemCount ==0
+        isEmptyList = characters.itemCount == 0
     )
 
     if (listType == ListType.LIST) {
@@ -65,6 +68,12 @@ fun CharacterListContent(
                 contentPadding = PaddingValues(SMALL_PADDING)
             ) {
 
+                item {
+                    CharacterScreenHeader(
+                        listTypeIconId = listTypeIconId,
+                        onClickListTypeIcon = onClickListTypeIcon
+                    )
+                }
                 items(characters) {
                     it?.let {
                         CharacterItem(
@@ -97,6 +106,13 @@ fun CharacterListContent(
                     bottom = BOTTOM_NAV_PADDING
                 )
             ) {
+
+                item {
+                    CharacterScreenHeader(
+                        listTypeIconId = listTypeIconId,
+                        onClickListTypeIcon = onClickListTypeIcon
+                    )
+                }
                 items(characters.itemCount) { index ->
                     characters[index]?.let { it ->
                         CharacterItemForGridView(

@@ -29,19 +29,6 @@ fun handleLoadState(
     }
 
 
-
-    loadState.mediator?.let {
-        Log.d("HandleError", "MEdiator")
-        Log.d("HandleError", loadState.mediator?.refresh.toString())
-        Log.d("HandleError", loadState.mediator?.append.toString())
-        Log.d("HandleError", loadState.mediator?.prepend.toString())
-        Log.d("HandleError", "LOADSTATE")
-
-        Log.d("HandleError", loadState.refresh.toString())
-        Log.d("HandleError", loadState.append.toString())
-        Log.d("HandleError", loadState.prepend.toString())
-    }
-
     return when {
         loadState.refresh is LoadState.Loading || loadState.mediator?.refresh is LoadState.Loading -> {
 
