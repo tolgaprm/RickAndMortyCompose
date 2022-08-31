@@ -31,15 +31,19 @@ fun CharacterScreen(
 ) {
     val characters = characterViewModel.getAllHeroes.collectAsLazyPagingItems()
 
+
+
+
+    CharacterScreenHeader(listTypeIconId = characterViewModel.listTypeIcon.value) {
+        characterViewModel.onClickListTypeIcon()
+    }
+
+
     CharacterListContent(
         characters = characters,
         listType = characterViewModel.stateListType.value,
         widthSizeClass = widthSizeClass,
-        onClickCharacterItem = onClickCharacterItem,
-        listTypeIconId = characterViewModel.listTypeIcon.value,
-        onClickListTypeIcon = {
-            characterViewModel.onClickListTypeIcon()
-        }
+        onClickCharacterItem = onClickCharacterItem
     )
 
 }
