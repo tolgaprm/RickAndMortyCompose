@@ -1,6 +1,9 @@
 package com.prmto.rickandmortycompose.domain.model.enums
 
-enum class ListType {
-    LIST,
-    HORIZONTAL_GRID
+import com.prmto.rickandmortycompose.util.Constant.LIST_NAME
+import com.prmto.rickandmortycompose.util.Constant.VERTICAL_GRID_NAME
+
+enum class ListType(val listName: String) {
+    LIST(LIST_NAME),
+    VERTICAL_GRID(VERTICAL_GRID_NAME)
 }

@@ -1,6 +1,5 @@
 package com.prmto.rickandmortycompose.util
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
@@ -33,7 +32,7 @@ fun handleLoadState(
         loadState.refresh is LoadState.Loading || loadState.mediator?.refresh is LoadState.Loading -> {
 
             listType?.let {
-                if (listType == ListType.HORIZONTAL_GRID) {
+                if (listType == ListType.VERTICAL_GRID) {
                     CharacterItemShimmerEffect()
                 } else {
                     CharacterShimmerEffectListType()

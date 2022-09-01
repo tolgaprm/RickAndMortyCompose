@@ -65,7 +65,7 @@ fun CharacterListContent(
 
         if (result) {
             LazyColumn(
-                contentPadding = PaddingValues(SMALL_PADDING)
+                contentPadding = PaddingValues(SMALL_PADDING),
             ) {
 
                 item {
@@ -74,7 +74,10 @@ fun CharacterListContent(
                         onClickListTypeIcon = onClickListTypeIcon
                     )
                 }
-                items(characters) {
+                items(
+                    characters,
+                    key = { item: Character -> item.id }
+                ) {
                     it?.let {
                         CharacterItem(
                             character = it,
@@ -113,7 +116,9 @@ fun CharacterListContent(
                         onClickListTypeIcon = onClickListTypeIcon
                     )
                 }
-                items(characters.itemCount) { index ->
+                items(
+                    characters.itemCount,
+                ) { index ->
                     characters[index]?.let { it ->
                         CharacterItemForGridView(
                             character = it,

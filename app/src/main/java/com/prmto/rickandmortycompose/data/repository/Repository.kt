@@ -2,6 +2,8 @@ package com.prmto.rickandmortycompose.data.repository
 
 import androidx.paging.PagingData
 import com.prmto.rickandmortycompose.domain.model.*
+import com.prmto.rickandmortycompose.domain.model.enums.ListType
+import com.prmto.rickandmortycompose.domain.repository.DataStoreOperations
 import com.prmto.rickandmortycompose.domain.repository.RemoteDataSource
 import com.prmto.rickandmortycompose.util.Resource
 import kotlinx.coroutines.flow.Flow
@@ -9,7 +11,8 @@ import javax.inject.Inject
 
 
 class Repository @Inject constructor(
-    private val remoteDataSource: RemoteDataSource
+    private val remoteDataSource: RemoteDataSource,
+    private val dataStoreOperations: DataStoreOperations
 ) {
     fun getAllCharacters(): Flow<PagingData<Character>> {
         return remoteDataSource.getAllCharacters()
@@ -37,5 +40,14 @@ class Repository @Inject constructor(
 
     fun getEpisodeDetail(episodeId: Int): Flow<Resource<EpisodeDetail>> {
         return remoteDataSource.getEpisodeDetail(episodeId = episodeId)
+    }
+
+
+    suspend fun saveListType(listType: ListType) {
+        dataStoreOperations.saveListType(listType = listType)
+    }
+
+    fun readListType(): Flow<String> {
+        return dataStoreOperations.readListType()
     }
 }

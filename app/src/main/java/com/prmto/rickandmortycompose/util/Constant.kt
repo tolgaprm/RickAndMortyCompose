@@ -10,6 +10,13 @@ object Constant {
 
     const val DATABASE_NAME = "RickAndMortyDatabase"
 
+    const val PREFERENCES_NAME = "rickAndMortyPreferencesName"
+
+    const val PREFERENCES_KEY = "list_type_preferences_key"
+
+    const val LIST_NAME = "list"
+    const val VERTICAL_GRID_NAME = "vertical_grid_name"
+
     const val CHARACTER_TABLE_NAME = "character_table"
     const val LOCATION_TABLE_NAME = "location_table"
     const val EPISODE_TABLE_NAME = "episode_table"
