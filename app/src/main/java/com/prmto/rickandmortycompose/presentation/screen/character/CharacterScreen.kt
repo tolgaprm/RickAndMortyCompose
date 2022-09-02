@@ -14,6 +14,8 @@ import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.annotation.ExperimentalCoilApi
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.prmto.rickandmortycompose.R
 import com.prmto.rickandmortycompose.presentation.components.CharacterListContent
 import com.prmto.rickandmortycompose.presentation.ui.theme.ICON_SIZE
@@ -32,17 +34,28 @@ fun CharacterScreen(
     val characters = characterViewModel.getAllHeroes.collectAsLazyPagingItems()
 
 
+    val swipeRefreshState = rememberSwipeRefreshState(isRefreshing = false)
 
-    CharacterListContent(
-        characters = characters,
-        listType = characterViewModel.stateListType.value,
-        widthSizeClass = widthSizeClass,
-        onClickCharacterItem = onClickCharacterItem,
-        listTypeIconId = characterViewModel.listTypeIcon.value,
-        onClickListTypeIcon = {
-            characterViewModel.onClickListTypeIcon()
-        }
-    )
+    SwipeRefresh(
+        state = swipeRefreshState,
+        onRefresh = {
+            swipeRefreshState.isRefreshing = true
+            characters.refresh()
+            swipeRefreshState.isRefreshing = false
+        },
+    ) {
+        CharacterListContent(
+            characters = characters,
+            listType = characterViewModel.stateListType.value,
+            widthSizeClass = widthSizeClass,
+            onClickCharacterItem = onClickCharacterItem,
+            listTypeIconId = characterViewModel.listTypeIcon.value,
+            onClickListTypeIcon = {
+                characterViewModel.onClickListTypeIcon()
+            }
+        )
+    }
+
 
 }
 

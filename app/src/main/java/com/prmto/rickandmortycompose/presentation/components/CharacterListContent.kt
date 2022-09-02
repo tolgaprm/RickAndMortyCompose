@@ -8,6 +8,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -68,7 +69,8 @@ fun CharacterListContent(
                 contentPadding = PaddingValues(SMALL_PADDING),
             ) {
 
-                item {
+                item(
+                ) {
                     CharacterScreenHeader(
                         listTypeIconId = listTypeIconId,
                         onClickListTypeIcon = onClickListTypeIcon
@@ -110,7 +112,11 @@ fun CharacterListContent(
                 )
             ) {
 
-                item {
+                item(
+                    span = {
+                        GridItemSpan(maxCurrentLineSpan)
+                    }
+                ) {
                     CharacterScreenHeader(
                         listTypeIconId = listTypeIconId,
                         onClickListTypeIcon = onClickListTypeIcon
