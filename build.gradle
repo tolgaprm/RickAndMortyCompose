@@ -8,6 +8,10 @@ buildscript {
         moshi_version = "1.9.3"
         navigation_version = "2.5.1"
         lottieVersion = "5.2.0"
+        paging_version = "1.0.0-alpha16"
+        data_store_version ="1.0.0"
+        splash_screen_version="1.0.0"
+        window_manager_version="1.1.0-alpha03"
     }
 
     dependencies {
