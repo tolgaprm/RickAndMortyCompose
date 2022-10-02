@@ -1,4 +1,4 @@
-package com.prmto.rickandmortycompose.presentation.components
+package com.prmto.rickandmortycompose.presentation.comman
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
+import androidx.compose.ui.tooling.preview.Preview
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition

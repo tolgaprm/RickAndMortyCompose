@@ -20,6 +20,7 @@ import com.prmto.rickandmortycompose.domain.model.Location
 import com.prmto.rickandmortycompose.navigation.Screen
 import com.prmto.rickandmortycompose.presentation.ui.theme.*
 import com.prmto.rickandmortycompose.util.Constant
+import com.prmto.rickandmortycompose.util.MultiDevicePreview
 import com.prmto.rickandmortycompose.util.handleLoadState
 
 @ExperimentalUnitApi
@@ -114,16 +115,32 @@ fun LocationItem(
 }
 
 @ExperimentalUnitApi
-@Preview
+@MultiDevicePreview
 @Composable
 fun LocationItemPreview() {
-    LocationItem(
-        location = Location(
-            id = 1,
-            type = "Planet",
-            name = "Earth (C-137)"
 
-        ), widthSizeClass = WindowWidthSizeClass.Compact,
-        onClickItem = {}
-    )
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(Constant.LOCATION_LIST_GRID_CELL),
+        contentPadding = PaddingValues(
+            top = LARGE_PADDING,
+            start = LARGE_PADDING,
+            end = LARGE_PADDING,
+            bottom = BOTTOM_NAV_PADDING
+        ),
+        verticalArrangement = Arrangement.spacedBy(LARGE_PADDING),
+        horizontalArrangement = Arrangement.spacedBy(LARGE_PADDING)
+    ){
+        items(10){
+            LocationItem(
+                location = Location(
+                    id = 1,
+                    type = "Planet",
+                    name = "Earth (C-137)"
+
+                ), widthSizeClass = WindowWidthSizeClass.Compact,
+                onClickItem = {}
+            )
+        }
+    }
+
 }

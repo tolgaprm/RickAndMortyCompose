@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -94,5 +95,18 @@ fun CharacterScreenHeader(
 
 }
 
+@Preview(showBackground = true)
+@Composable
+fun CharacterScreenHeaderPreview() {
+    CharacterScreenHeader(listTypeIconId = R.drawable.ic_filter_list) {
 
+    }
+}
 
+@Preview(showBackground = true)
+@Composable
+fun CharacterScreenHeaderWithGridListPreview() {
+    CharacterScreenHeader(listTypeIconId = R.drawable.grid_list) {
+
+    }
+}

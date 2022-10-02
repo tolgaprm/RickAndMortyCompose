@@ -6,7 +6,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.annotation.ExperimentalCoilApi
-import com.prmto.rickandmortycompose.presentation.components.ErrorScreen
+import com.prmto.rickandmortycompose.presentation.comman.ErrorScreen
 
 @ExperimentalUnitApi
 @ExperimentalCoilApi

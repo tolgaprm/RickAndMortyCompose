@@ -3,6 +3,7 @@ package com.prmto.rickandmortycompose.presentation.components
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
@@ -20,6 +21,7 @@ import com.prmto.rickandmortycompose.domain.model.Episode
 import com.prmto.rickandmortycompose.domain.model.EpisodeListItem
 import com.prmto.rickandmortycompose.navigation.Screen
 import com.prmto.rickandmortycompose.presentation.ui.theme.*
+import com.prmto.rickandmortycompose.util.MultiDevicePreviewWithOutSystemUI
 import com.prmto.rickandmortycompose.util.handleLoadState
 
 @Composable
@@ -160,4 +162,55 @@ fun EpisodeItemContent(
             Icon(imageVector = Icons.Default.ArrowForward, contentDescription = null)
         }
     }
+}
+
+@MultiDevicePreviewWithOutSystemUI
+@Composable
+fun EpisodeItemPreview() {
+
+
+    LazyColumn(
+        contentPadding = PaddingValues(
+            top = LARGE_PADDING,
+            start = LARGE_PADDING,
+            end = LARGE_PADDING,
+            bottom = BOTTOM_NAV_PADDING
+        ),
+        verticalArrangement = Arrangement.spacedBy(MEDIUM_PADDING)
+    ) {
+        items(
+            listOf(
+                Episode(id = 1, name = "Pilot", air_date = "December 2, 2013", episode = "S01E01"),
+                Episode(
+                    id = 2,
+                    name = "Lawnmower",
+                    air_date = "December 9, 2013",
+                    episode = "S01E02"
+                ),
+                Episode(
+                    id = 3,
+                    name = "Anatomy Park",
+                    air_date = "December 16, 2013",
+                    episode = "S01E03"
+                ),
+                Episode(
+                    id = 4,
+                    name = "A Rickle in Time",
+                    air_date = "July 26, 2015",
+                    episode = "S02E01"
+                )
+            )
+        ) {
+            EpisodeItemContent(
+                episode = Episode(
+                    id = it.id,
+                    name = it.name,
+                    air_date = it.air_date,
+                    episode = it.episode
+                ),
+                onClickEpisodeItem = { }
+            )
+        }
+    }
+
 }

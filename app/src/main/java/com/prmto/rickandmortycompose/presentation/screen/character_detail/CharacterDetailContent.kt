@@ -24,18 +24,21 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.compose.ui.unit.sp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import coil.request.ImageRequest
 import com.prmto.rickandmortycompose.R
+import com.prmto.rickandmortycompose.data.remote.dto.CharacterLocation
+import com.prmto.rickandmortycompose.data.remote.dto.Origin
 import com.prmto.rickandmortycompose.domain.model.CharacterDetail
 import com.prmto.rickandmortycompose.domain.model.Episode
 import com.prmto.rickandmortycompose.presentation.comman.AnimatedEpisodeShimmerEffect
 import com.prmto.rickandmortycompose.presentation.components.EpisodeItemContent
-import com.prmto.rickandmortycompose.presentation.comman.EpisodeItemShimmerEffect
 import com.prmto.rickandmortycompose.presentation.ui.theme.*
+import com.prmto.rickandmortycompose.util.MultiDevicePreview
 
 @ExperimentalUnitApi
 @ExperimentalCoilApi
@@ -81,7 +84,7 @@ fun CharacterDetailContent(
         }
 
         if (isLoading) {
-            items(6){
+            items(6) {
                 AnimatedEpisodeShimmerEffect()
             }
         } else {
@@ -303,4 +306,40 @@ fun InformationContent(
 
     }
 
+}
+
+
+@ExperimentalUnitApi
+@ExperimentalCoilApi
+@MultiDevicePreview
+@Composable
+fun CharacterDetailContent() {
+    CharacterDetailContent(
+        characterDetail = CharacterDetail(
+            id = 1,
+            name = "Rick Sanchez",
+            status = "Alive",
+            species = "Human",
+            type = "",
+            gender = "Male",
+            origin = Origin(name = "Earth (C-137)", url = ""),
+            location = CharacterLocation(name = "Citadel of Ricks", url = ""),
+            image = "",
+            episode = emptyList()
+        ),
+        episodes = listOf(
+            Episode(id = 1, name = "Pilot", air_date = "December 2, 2013", episode = "S01E01"),
+            Episode(id = 2, name = "Lawnmower", air_date = "December 9, 2013", episode = "S01E02"),
+            Episode(
+                id = 3,
+                name = "Anatomy Park",
+                air_date = "December 16, 2013",
+                episode = "S01E03"
+            )
+        ),
+        isLoading = false,
+        widthSizeClass = WindowWidthSizeClass.Medium,
+        onClickLocationItem = {},
+        onClickEpisodeItem = {}
+    )
 }

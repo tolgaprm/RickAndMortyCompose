@@ -37,6 +37,7 @@ import com.prmto.rickandmortycompose.domain.model.Character
 import com.prmto.rickandmortycompose.domain.model.enums.ListType
 import com.prmto.rickandmortycompose.presentation.screen.character.CharacterScreenHeader
 import com.prmto.rickandmortycompose.presentation.ui.theme.*
+import com.prmto.rickandmortycompose.util.MultiDevicePreviewWithOutSystemUI
 import com.prmto.rickandmortycompose.util.handleLoadState
 import com.prmto.rickandmortycompose.util.isExpandedScreen
 import com.prmto.rickandmortycompose.util.isMediumScreen
@@ -327,7 +328,7 @@ fun CharacterItem(
 @ExperimentalUnitApi
 @ExperimentalCoilApi
 @ExperimentalMaterialApi
-@Preview(showBackground = true)
+@MultiDevicePreviewWithOutSystemUI
 @Composable
 fun CharacterItemPreview() {
     CharacterItem(
@@ -339,26 +340,8 @@ fun CharacterItemPreview() {
             gender = "Male",
             species = "Human"
         ), onClick = {},
-        widthSizeClass = WindowWidthSizeClass.Medium
+        widthSizeClass = WindowWidthSizeClass.Compact
     )
 }
 
 
-@ExperimentalUnitApi
-@ExperimentalCoilApi
-@ExperimentalMaterialApi
-@Preview
-@Composable
-fun CharacterItemForGridViewPreview() {
-    CharacterItemForGridView(
-        character = Character(
-            id = 1,
-            name = "Rick Sanchez",
-            status = "Alive",
-            image = "",
-            gender = "Male",
-            species = "Human"
-        ), onClick = {},
-        widthSizeClass = WindowWidthSizeClass.Medium
-    )
-}

@@ -9,7 +9,7 @@ import com.prmto.rickandmortycompose.presentation.comman.CharacterItemShimmerEff
 import com.prmto.rickandmortycompose.presentation.comman.CharacterShimmerEffectListType
 import com.prmto.rickandmortycompose.presentation.comman.EpisodeItemShimmerEffect
 import com.prmto.rickandmortycompose.presentation.comman.LocationShimmerEffect
-import com.prmto.rickandmortycompose.presentation.components.ErrorScreen
+import com.prmto.rickandmortycompose.presentation.comman.ErrorScreen
 
 @Composable
 fun handleLoadState(

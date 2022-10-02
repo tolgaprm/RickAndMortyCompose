@@ -13,7 +13,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.compose.ui.unit.dp
@@ -23,11 +22,12 @@ import com.prmto.rickandmortycompose.domain.model.Character
 import com.prmto.rickandmortycompose.domain.model.EpisodeDetail
 import com.prmto.rickandmortycompose.domain.model.LocationDetail
 import com.prmto.rickandmortycompose.presentation.components.CharacterItemForGridView
-import com.prmto.rickandmortycompose.presentation.components.ErrorScreen
 import com.prmto.rickandmortycompose.presentation.ui.theme.LARGE_PADDING
 import com.prmto.rickandmortycompose.presentation.ui.theme.MEDIUM_PADDING
 import com.prmto.rickandmortycompose.presentation.ui.theme.SMALL_PADDING
 import com.prmto.rickandmortycompose.presentation.ui.theme.detailHeaderBackgroundColor
+import com.prmto.rickandmortycompose.util.MultiDevicePreview
+import com.prmto.rickandmortycompose.util.MultiDevicePreviewWithOutSystemUI
 import kotlin.math.min
 
 @ExperimentalCoilApi
@@ -199,7 +199,7 @@ fun DetailHeader(
 
 @ExperimentalCoilApi
 @ExperimentalUnitApi
-@Preview
+@MultiDevicePreviewWithOutSystemUI
 @Composable
 fun DetailHeaderLocationPreview() {
     DetailHeader(
@@ -215,7 +215,7 @@ fun DetailHeaderLocationPreview() {
 
 @ExperimentalCoilApi
 @ExperimentalUnitApi
-@Preview
+@MultiDevicePreviewWithOutSystemUI
 @Composable
 fun DetailHeaderEpisodePreview() {
     DetailHeader(
@@ -228,4 +228,86 @@ fun DetailHeaderEpisodePreview() {
             characters = emptyList(),
         )
     )
+}
+
+
+@ExperimentalCoilApi
+@ExperimentalUnitApi
+@MultiDevicePreview
+@Composable
+fun DetailContentPreview() {
+    DetailContent(
+        widthSizeClass = WindowWidthSizeClass.Compact,
+        characters = listOf(
+            Character(
+                id = 1,
+                name = "Rick Sanchez",
+                status = "Alive",
+                image = "",
+                species = "Human",
+                gender = "Male"
+            ),
+            Character(
+                id = 1,
+                name = "Morty Smith",
+                status = "Alive",
+                image = "",
+                species = "Human",
+                gender = "Male"
+            ),
+            Character(
+                id = 1,
+                name = "Adjudicator Rick",
+                status = "Dead",
+                image = "",
+                species = "Human",
+                gender = "Male"
+            ),
+            Character(
+                id = 1,
+                name = "Agency Director",
+                status = "Dead",
+                image = "",
+                species = "Human",
+                gender = "Male"
+            ),
+            Character(
+                id = 1,
+                name = "Rick Sanchez",
+                status = "Alive",
+                image = "",
+                species = "Human",
+                gender = "Male"
+            ),
+            Character(
+                id = 1,
+                name = "Morty Smith",
+                status = "Alive",
+                image = "",
+                species = "Human",
+                gender = "Male"
+            ),
+            Character(
+                id = 1,
+                name = "Adjudicator Rick",
+                status = "Dead",
+                image = "",
+                species = "Human",
+                gender = "Male"
+            ),
+            Character(
+                id = 1,
+                name = "Agency Director",
+                status = "Dead",
+                image = "",
+                species = "Human",
+                gender = "Male"
+            )
+        ),
+        isLoading = false,
+        isError = false,
+        onClickCharacterItem = {}
+    ) {
+
+    }
 }
